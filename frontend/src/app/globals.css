@@ -1,0 +1,198 @@
+@import 'tailwindcss';
+
+:root {
+  /* Cores de fundo e texto */
+  --white: #ffffff;
+  --dark: #171717;
+  --gray: #e6e6e6;
+
+  /* Paleta principal */
+  --primary: #001a7a;
+  --secondary: #002493;
+  --tertiary: #0066b3;
+
+  /* Feedback */
+  --neutral: #f5f7fa;
+  --danger: #d32f2f;
+  --success: #388e3c;
+  --warning: #f57c00;
+
+  /* Status personalizados */
+  --selagem: #eafbd7;
+  --juridico: #fdd3d0;
+  --cadSocial: #fff1c2;
+  --pending: #fff1c2;
+  --notStarted: #fdd3d0;
+  --waiting: #fff1c2;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* 📄 Estilos globais */
+body {
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* 🔘 Transições para elementos interativos */
+button,
+input,
+select,
+textarea {
+  transition: all 0.2s ease-in-out;
+}
+
+/* 🎨 Utilitários de cor de fundo */
+.bg-white {
+  background-color: var(--white);
+}
+.bg-dark {
+  background-color: var(--dark);
+}
+.bg-gray {
+  background-color: var(--gray);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+.bg-secondary {
+  background-color: var(--secondary);
+}
+.bg-tertiary {
+  background-color: var(--tertiary);
+}
+.bg-neutral {
+  background-color: var(--neutral);
+}
+.bg-danger {
+  background-color: var(--danger);
+}
+.bg-success {
+  background-color: var(--success);
+}
+.bg-warning {
+  background-color: var(--warning);
+}
+
+.bg-selagem {
+  background-color: var(--selagem);
+}
+.bg-juridico {
+  background-color: var(--juridico);
+}
+.bg-cadSocial {
+  background-color: var(--cadSocial);
+}
+.bg-pending {
+  background-color: var(--pending);
+}
+.bg-notStarted {
+  background-color: var(--notStarted);
+}
+.bg-waiting {
+  background-color: var(--waiting);
+}
+
+/* 🎨 Utilitários de cor de texto */
+.text-white {
+  color: var(--white);
+}
+.text-dark {
+  color: var(--dark);
+}
+.text-gray {
+  color: var(--gray);
+}
+
+.text-primary {
+  color: var(--primary);
+}
+.text-secondary {
+  color: var(--secondary);
+}
+.text-tertiary {
+  color: var(--tertiary);
+}
+.text-neutral {
+  color: var(--neutral);
+}
+.text-danger {
+  color: var(--danger);
+}
+.text-success {
+  color: var(--success);
+}
+.text-warning {
+  color: var(--warning);
+}
+
+.text-selagem {
+  color: var(--selagem);
+}
+.text-juridico {
+  color: var(--juridico);
+}
+.text-cadSocial {
+  color: var(--cadSocial);
+}
+.text-pending {
+  color: var(--pending);
+}
+.text-notStarted {
+  color: var(--notStarted);
+}
+.text-waiting {
+  color: var(--waiting);
+}
+
+/* 🔲 Utilitários de borda */
+.border-primary {
+  border-color: var(--primary);
+}
+.border-secondary {
+  border-color: var(--secondary);
+}
+.border-tertiary {
+  border-color: var(--tertiary);
+}
+.border-neutral {
+  border-color: var(--neutral);
+}
+.border-danger {
+  border-color: var(--danger);
+}
+.border-success {
+  border-color: var(--success);
+}
+.border-warning {
+  border-color: var(--warning);
+}
+
+.border-selagem {
+  border-color: var(--selagem);
+}
+.border-juridico {
+  border-color: var(--juridico);
+}
+.border-cadSocial {
+  border-color: var(--cadSocial);
+}
+.border-pending {
+  border-color: var(--pending);
+}
+.border-notStarted {
+  border-color: var(--notStarted);
+}
+.border-waiting {
+  border-color: var(--waiting);
+}
