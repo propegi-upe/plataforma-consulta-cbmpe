@@ -5,4 +5,5 @@ export interface UsersRepository {
   save(user: User): Promise<void>;
   findById(id: string): Promise<User | null>;
   findMany(query: { limit?: number; offset?: number }): Promise<User[]>;
+  findByEmail(email: string): Promise<User | null>;
 }

@@ -16,6 +16,7 @@ export class ProcessEntity extends Base {
   public waitingTimeCbmpe: number;
 
   constructor(
+    userId: string,
     establishmentId: string,
     processType: string,
     processProtocol: string,
@@ -27,8 +28,7 @@ export class ProcessEntity extends Base {
     waitingTimeCbmpe: number,
   ) {
     super();
-
-    // Atribuição das chaves estrangeiras
+    this.userId = userId;
     this.establishmentId = establishmentId;
 
     this.processType = processType;

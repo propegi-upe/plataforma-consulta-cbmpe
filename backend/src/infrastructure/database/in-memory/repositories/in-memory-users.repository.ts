@@ -24,4 +24,13 @@ export class InMemoryUsersRepository implements UsersRepository {
     const blocksArray = Array.from(this.users.values());
     return blocksArray.slice(offset, offset + limit);
   }
+
+  async findByEmail(email: string): Promise<User | null> {
+    for (const user of this.users.values()) {
+      if (user.email === email) {
+        return user;
+      }
+    }
+    return null;
+  }
 }

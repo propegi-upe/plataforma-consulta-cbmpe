@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { EstablishmentEntity } from '../entities/establishment.entity';
-
+import { EstablishmentEntity } from 'src/domain/entities/establishment.entity';
 type CreateEstablishmentProps = Omit<
   EstablishmentEntity,
   'id' | 'createdAt' | 'updatedAt'

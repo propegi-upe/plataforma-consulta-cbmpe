@@ -1,42 +1,28 @@
-import { Inject } from '@nestjs/common';
-import { Document } from 'src/domain/entities/document.entity';
-import { DocumentsRepository } from 'src/domain/repositories/documents.repository';
-
-export type CreateDocumentUseCaseRequest = {
-  path: string;
-  entityId: string;
-  type?: string;
-  description?: string;
-  fileSize?: number;
-  name?: string;
-};
+import { Injectable, Inject } from '@nestjs/common';
+import { DocumentEntity } from 'src/domain/entities/document.entity';
+import { DocumentFactory } from 'src/test/factories/document.factory';
+import { DocumentRepository } from 'src/domain/repositories/document.repository';
+import { CreateDocumentDto } from '../dtos/create-document.dto';
+import { DOCUMENTS_REPOSITORY } from 'src/domain/repositories/tokens';
 
 export type CreateDocumentUseCaseResponse = {
-  document: Document;
+  document: DocumentEntity;
 };
 
+@Injectable()
 export class CreateDocumentUseCase {
   constructor(
-    @Inject('DocumentsRepository')
-    private readonly documentsRepository: DocumentsRepository,
+    @Inject(DOCUMENTS_REPOSITORY)
+    private readonly documentsRepository: DocumentRepository,
+
+    private readonly documentFactory: DocumentFactory,
   ) {}
 
-  async execute({
-    path,
-    entityId,
-    type,
-    description,
-    fileSize,
-    name,
-  }: CreateDocumentUseCaseRequest): Promise<CreateDocumentUseCaseResponse> {
-    const document = new Document(
-      path,
-      entityId,
-      type,
-      description,
-      fileSize,
-      name,
-    );
+  async execute(
+    dto: CreateDocumentDto,
+  ): Promise<CreateDocumentUseCaseResponse> {
+    const document = this.documentFactory.create(dto);
+
     await this.documentsRepository.create(document);
 
     return { document };
