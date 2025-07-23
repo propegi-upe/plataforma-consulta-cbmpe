@@ -6,3 +6,4 @@ export * from './lineInfo';
 export * from './tabs';
 export * from './tab';
 export * from './statusChip';
+export * from './modalFavorite';

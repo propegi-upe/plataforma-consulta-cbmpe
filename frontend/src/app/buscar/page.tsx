@@ -10,12 +10,14 @@ import CardSolicitacao from './components/CardSolicitacao';
 import { Avcb, Solicitacao } from '@/types/cardsolicitacao';
 import { Tab, Tabs } from '@/components';
 import CardAvcb from './components/CardAvcb';
+import ModalFavoritar from '@/components/modalFavorite';
 
 export default function Search() {
   const [textoPesquisa, setTextoPesquisa] = useState('');
   const [dadosMocadosSolicitacoes, setDadosMocadosSolicitacoes] = useState<Solicitacao[]>([]);
   const [dadosMocadosAVCB, setDadosMocadosAVCB] = useState<Avcb[]>([]);
   const [activeTab, setActiveTab] = useState('Solicitações');
+  const [modalFavoriteOpen, setModalFavoriteOpen] = useState(false);
 
   const handleSearch = () => {
     setDadosMocadosSolicitacoes([
@@ -107,7 +109,11 @@ export default function Search() {
             {dadosMocadosSolicitacoes.length > 0 ? (
               <div className="display-flex">
                 {dadosMocadosSolicitacoes.map((item) => (
-                  <CardSolicitacao key={item.id} item={item} />
+                  <CardSolicitacao
+                    key={item.id}
+                    item={item}
+                    setModalFavoriteOpen={setModalFavoriteOpen}
+                  />
                 ))}
               </div>
             ) : (
@@ -126,7 +132,7 @@ export default function Search() {
             {dadosMocadosAVCB.length > 0 ? (
               <div className="display-flex">
                 {dadosMocadosAVCB.map((item) => (
-                  <CardAvcb key={item.id} item={item} />
+                  <CardAvcb key={item.id} item={item} setModalFavoriteOpen={setModalFavoriteOpen} />
                 ))}
               </div>
             ) : (
@@ -143,6 +149,7 @@ export default function Search() {
           </Tab>
         </Tabs>
       </div>
+      <ModalFavoritar open={modalFavoriteOpen} onClose={() => setModalFavoriteOpen(false)} />
     </>
   );
 }

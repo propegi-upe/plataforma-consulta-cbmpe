@@ -3,13 +3,16 @@ import { Avcb } from '@/types/cardsolicitacao';
 import { formatarData } from '@/utils/formData';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import Image from 'next/image';
+import favoriteOutline from '@/assets/favoriteOutline.svg';
 
 type CardAvcbProps = {
   key: number;
   item: Avcb;
+  setModalFavoriteOpen: (open: boolean) => void;
 };
 
-export default function CardAvcb({ item }: CardAvcbProps) {
+export default function CardAvcb({ item, setModalFavoriteOpen }: CardAvcbProps) {
   const { nomeFantasia, endereco, validade } = item;
   const router = useRouter();
   const validadeBgColor = new Date(validade) < new Date() ? 'bg-gray' : 'bg-statusValidade1';
@@ -27,7 +30,17 @@ export default function CardAvcb({ item }: CardAvcbProps) {
       onClick={() => router.push(`/buscar/${item.id}`)}
     >
       <div className="mb-4">
-        <span>❤️</span>
+        <Image
+          src={favoriteOutline}
+          alt="favoriteOutline"
+          width={25}
+          height={25}
+          onClick={(e) => {
+            e.stopPropagation();
+            setModalFavoriteOpen(true);
+          }}
+          className="cursor-pointer hover:opacity-80"
+        />
       </div>
       <div>
         <strong>{nomeFantasia}</strong>

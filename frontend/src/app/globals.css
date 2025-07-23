@@ -223,3 +223,15 @@ input:focus {
 .border-statusValidade10 {
   border-color: var(--statusValidade10);
 }
+
+@keyframes modalFavoritar {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.animate-modalFavoritar {
+  animation: modalFavoritar 0.3s ease;
+}

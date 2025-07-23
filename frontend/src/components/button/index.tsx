@@ -10,7 +10,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     | 'white'
     | 'gray'
     | 'outline'
-    | 'ghost';
+    | 'ghost'
+    | 'outlineAzul'
+    | 'filledAzul';
   children: React.ReactNode;
   className?: string;
   type?: 'button' | 'submit' | 'reset';
@@ -39,6 +41,8 @@ const Button: React.FC<ButtonProps> = ({
     gray: 'bg-gray-200 text-dark border hover:!bg-[#e6f3ff] cursor-pointer',
     ghost: 'bg-white border border-blue-600 text-dark border hover:!bg-gray-300 cursor-pointer',
     outline: 'bg-[#e6f3ff] text-dark cursor-pointer',
+    filledAzul: 'bg-[#4897FA] text-white cursor-pointer',
+    outlineAzul: 'bg-white text-[#4897FA] cursor-pointer shadow-none border border-[#4897FA]',
   };
 
   return (

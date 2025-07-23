@@ -3,6 +3,8 @@ import { Solicitacao } from '@/types/cardsolicitacao';
 import { formatarData } from '@/utils/formData';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import Image from 'next/image';
+import favoriteOutline from '@/assets/favoriteOutline.svg';
 
 const statusColorBorder: { [key: string]: string } = {
   'Em exigência': 'border-requirement',
@@ -27,9 +29,10 @@ const statusColorCircle: { [key: string]: string } = {
 type CardSolicitacaoProps = {
   key: number;
   item: Solicitacao;
+  setModalFavoriteOpen: (open: boolean) => void;
 };
 
-export default function CardSolicitacao({ item }: CardSolicitacaoProps) {
+export default function CardSolicitacao({ item, setModalFavoriteOpen }: CardSolicitacaoProps) {
   const { protocolo, dataAbertura, nome, cnpj, status } = item;
   const borda = `border-l-[10px] ${statusColorBorder[status] || 'border-gray-300'}`;
   const router = useRouter();
@@ -68,7 +71,17 @@ export default function CardSolicitacao({ item }: CardSolicitacaoProps) {
           circleColor={statusColorCircle[status] || 'bg-gray-300'}
         />
         <div>
-          <span>❤️</span>
+          <Image
+            src={favoriteOutline}
+            alt="favoriteOutline"
+            width={25}
+            height={25}
+            onClick={(e) => {
+              e.stopPropagation();
+              setModalFavoriteOpen(true);
+            }}
+            className="cursor-pointer hover:opacity-80"
+          />
         </div>
       </div>
     </div>
