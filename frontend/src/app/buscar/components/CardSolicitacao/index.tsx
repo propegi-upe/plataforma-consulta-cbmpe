@@ -2,9 +2,10 @@ import StatusChip from '@/components/statusChip';
 import { Solicitacao } from '@/types/cardsolicitacao';
 import { formatarData } from '@/utils/formData';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import favoriteOutline from '@/assets/favoriteOutline.svg';
+import ModalFavoritar from '@/components/modalFavorite';
 
 const statusColorBorder: { [key: string]: string } = {
   'Em exigência': 'border-requirement',
@@ -29,61 +30,64 @@ const statusColorCircle: { [key: string]: string } = {
 type CardSolicitacaoProps = {
   key: number;
   item: Solicitacao;
-  setModalFavoriteOpen: (open: boolean) => void;
 };
 
-export default function CardSolicitacao({ item, setModalFavoriteOpen }: CardSolicitacaoProps) {
+export default function CardSolicitacao({ item }: CardSolicitacaoProps) {
   const { protocolo, dataAbertura, nome, cnpj, status } = item;
   const borda = `border-l-[10px] ${statusColorBorder[status] || 'border-gray-300'}`;
   const router = useRouter();
+  const [modalFavoriteOpen, setModalFavoriteOpen] = useState(false);
 
   return (
-    <div
-      className={`bg-white rounded-lg shadow-sm p-4 mb-4 ${borda} text-dark cursor-pointer hover:shadow-lg transition-all`}
-      onClick={() => router.push(`/buscar/${item.id}?type=solicitacao`)}
-    >
-      <div className="flex flex-row justify-between items-center">
-        <div className="flex flex-col">
-          <strong>Protocolo</strong>
-          <span>{protocolo}</span>
+    <>
+      <div
+        className={`bg-white rounded-lg shadow-sm p-4 mb-4 ${borda} text-dark cursor-pointer hover:shadow-lg transition-all`}
+        onClick={() => router.push(`/buscar/${item.id}?type=solicitacao`)}
+      >
+        <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-col">
+            <strong>Protocolo</strong>
+            <span>{protocolo}</span>
+          </div>
+          <div className="flex flex-col">
+            <strong>Data de Abertura</strong>
+            <span>{formatarData(dataAbertura)}</span>
+          </div>
         </div>
-        <div className="flex flex-col">
-          <strong>Data de Abertura</strong>
-          <span>{formatarData(dataAbertura)}</span>
-        </div>
-      </div>
-      <div>
-        <div className="flex flex-col">
-          <strong>Nome</strong>
-          <span>{nome}</span>
-        </div>
-      </div>
-      <div>
-        <div className="flex flex-col ">
-          <strong>CNPJ</strong>
-          <span>{cnpj}</span>
-        </div>
-      </div>
-      <div className="flex flex-row items-center justify-between mt-4">
-        <StatusChip
-          status={status}
-          bgColor={statusColorChip[status] || 'bg-gray-300'}
-          circleColor={statusColorCircle[status] || 'bg-gray-300'}
-        />
         <div>
-          <Image
-            src={favoriteOutline}
-            alt="favoriteOutline"
-            width={25}
-            height={25}
-            onClick={(e) => {
-              e.stopPropagation();
-              setModalFavoriteOpen(true);
-            }}
-            className="cursor-pointer hover:opacity-80"
+          <div className="flex flex-col">
+            <strong>Nome</strong>
+            <span>{nome}</span>
+          </div>
+        </div>
+        <div>
+          <div className="flex flex-col ">
+            <strong>CNPJ</strong>
+            <span>{cnpj}</span>
+          </div>
+        </div>
+        <div className="flex flex-row items-center justify-between mt-4">
+          <StatusChip
+            status={status}
+            bgColor={statusColorChip[status] || 'bg-gray-300'}
+            circleColor={statusColorCircle[status] || 'bg-gray-300'}
           />
+          <div>
+            <Image
+              src={favoriteOutline}
+              alt="favoriteOutline"
+              width={25}
+              height={25}
+              onClick={(e) => {
+                e.stopPropagation();
+                setModalFavoriteOpen(true);
+              }}
+              className="cursor-pointer hover:opacity-80"
+            />
+          </div>
         </div>
       </div>
-    </div>
+      <ModalFavoritar open={modalFavoriteOpen} onClose={() => setModalFavoriteOpen(false)} />
+    </>
   );
 }

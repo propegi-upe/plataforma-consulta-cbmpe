@@ -7,7 +7,7 @@ type ModalFavoritarProps = {
   children?: React.ReactNode;
 };
 
-export default function ModalProgressHistory({ open, onClose, children }: ModalFavoritarProps) {
+export default function ModalCustom({ open, onClose, children }: ModalFavoritarProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

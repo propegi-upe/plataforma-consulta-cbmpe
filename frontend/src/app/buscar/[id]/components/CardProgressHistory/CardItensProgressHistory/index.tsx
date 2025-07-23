@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import ModalProgressHistory from '../modalProgressHistory';
 import ModalPortal from '@/components/modalPortal';
 import Button from '@/components/button';
 import StatusChip from '@/components/statusChip';
+import ModalCustom from '@/components/modalCustom';
 
 type item = {
   title: string;
@@ -30,7 +30,7 @@ export default function CardItensProgressHistory({ item }: Props) {
         </div>
       </div>
       <ModalPortal>
-        <ModalProgressHistory open={openModal} onClose={() => setOpenModal(false)}>
+        <ModalCustom open={openModal} onClose={() => setOpenModal(false)}>
           <div className="text-center flex flex-col items-center text-dark">
             <div className="bg-gray-200 w-25 h-2 rounded mb-8" />
 
@@ -61,7 +61,7 @@ export default function CardItensProgressHistory({ item }: Props) {
               </span>
             </div>
           </div>
-        </ModalProgressHistory>
+        </ModalCustom>
       </ModalPortal>
     </>
   );

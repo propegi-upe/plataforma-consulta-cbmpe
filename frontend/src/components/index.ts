@@ -8,3 +8,4 @@ export * from './tab';
 export * from './statusChip';
 export * from './modalFavorite';
 export * from './modalPortal';
+export * from './modalCustom';
