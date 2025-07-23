@@ -27,7 +27,7 @@ export default function CardAvcb({ item, setModalFavoriteOpen }: CardAvcbProps) 
   return (
     <div
       className={`bg-white rounded-lg shadow-sm p-4 mb-4 ${borda} text-dark cursor-pointer hover:shadow-lg transition-all`}
-      onClick={() => router.push(`/buscar/${item.id}`)}
+      onClick={() => router.push(`/buscar/${item.id}?type=avcb`)}
     >
       <div className="mb-4">
         <Image

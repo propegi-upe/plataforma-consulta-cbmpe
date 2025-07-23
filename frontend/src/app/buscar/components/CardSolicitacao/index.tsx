@@ -40,7 +40,7 @@ export default function CardSolicitacao({ item, setModalFavoriteOpen }: CardSoli
   return (
     <div
       className={`bg-white rounded-lg shadow-sm p-4 mb-4 ${borda} text-dark cursor-pointer hover:shadow-lg transition-all`}
-      onClick={() => router.push(`/buscar/${item.id}`)}
+      onClick={() => router.push(`/buscar/${item.id}?type=solicitacao`)}
     >
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-col">

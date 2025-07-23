@@ -7,3 +7,4 @@ export * from './tabs';
 export * from './tab';
 export * from './statusChip';
 export * from './modalFavorite';
+export * from './modalPortal';
