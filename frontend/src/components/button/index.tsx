@@ -21,25 +21,33 @@ const Button: React.FC<ButtonProps> = ({
   children,
   className = '',
   type = 'button',
+  disabled,
   ...props
 }) => {
-  const baseStyle =
-    'px-4 py-2 rounded-lg font-medium shadow-md transition-all cursor-pointer hover:brightness-110';
+  const baseStyle = 'px-4 py-2 rounded-lg font-medium shadow-md transition-all';
+
+  // Adicione as classes para o estado desabilitado
+  const disabledStyle = 'bg-[#C6C7CA] text-white cursor-not-allowed hover:brightness-100';
 
   const variants = {
-    primary: 'bg-primary text-white hover:!opacity-90',
-    secondary: 'bg-secondary text-white hover:!opacity-90',
-    danger: 'bg-danger text-white hover:!opacity-90',
-    success: 'bg-success text-white hover:!opacity-90',
-    warning: 'bg-warning text-white hover:!opacity-90',
-    white: 'bg-white text-dark border hover:!bg-[#a1a1a1]',
-    gray: 'bg-gray-200 text-dark border hover:!bg-[#e6f3ff]',
-    ghost: 'bg-white border border-blue-600 text-dark border hover:!bg-gray-300',
-    outline: 'bg-[#e6f3ff] text-dark hover:!opacity-90',
+    primary: 'bg-primary text-white cursor-pointer hover:brightness-90',
+    secondary: 'bg-secondary text-white cursor-pointer hover:brightness-95',
+    danger: 'bg-danger text-white cursor-pointer hover:brightness-90',
+    success: 'bg-success text-white cursor-pointer hover:brightness-90',
+    warning: 'bg-warning text-white cursor-pointer hover:brightness-90',
+    white: 'bg-white text-dark border hover:!bg-[#a1a1a1] cursor-pointer',
+    gray: 'bg-gray-200 text-dark border hover:!bg-[#e6f3ff] cursor-pointer',
+    ghost: 'bg-white border border-blue-600 text-dark border hover:!bg-gray-300 cursor-pointer',
+    outline: 'bg-[#e6f3ff] text-dark cursor-pointer',
   };
 
   return (
-    <button type={type} className={`${baseStyle} ${variants[variant]}  ${className}`} {...props}>
+    <button
+      type={type}
+      disabled={disabled}
+      className={`${baseStyle} ${disabled ? disabledStyle : variants[variant]} ${className}`}
+      {...props}
+    >
       {children}
     </button>
   );

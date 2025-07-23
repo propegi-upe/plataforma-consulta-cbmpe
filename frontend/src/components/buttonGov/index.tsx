@@ -9,7 +9,7 @@ interface ButtonGovProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const ButtonGov: React.FC<ButtonGovProps> = ({ className = '', type = 'button', ...props }) => {
   const baseStyle =
-    'px-4 py-2 rounded-lg font-medium shadow-md transition-all cursor-pointer hover:brightness-110 bg-white text-dark hover:!bg-[#a1a1a1] flex items-center gap-2';
+    'px-4 py-2 rounded-lg font-medium shadow-md transition-all cursor-pointer hover:brightness-110 bg-white text-dark hover:!bg-[#a1a1a1] flex items-center gap-2 justify-center text-sm h-[50px]';
 
   return (
     <button type={type} className={`${baseStyle}  ${className}`} {...props}>

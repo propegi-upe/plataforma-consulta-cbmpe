@@ -8,7 +8,7 @@
 
   /* Paleta principal */
   --primary: #9e6767;
-  --secondary: #002493;
+  --secondary: #6bb5c0;
   --tertiary: #0066b3;
 
   /* Feedback */
@@ -24,6 +24,9 @@
   --pending: #fff1c2;
   --notStarted: #fdd3d0;
   --waiting: #fff1c2;
+  --requirement: #e45f5f;
+  --statusValidade1: #d1fae5;
+  --statusValidade10: #3cc881;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -49,6 +52,12 @@ input,
 select,
 textarea {
   transition: all 0.2s ease-in-out;
+}
+
+input:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
 }
 
 /* 🎨 Utilitários de cor de fundo */
@@ -101,6 +110,15 @@ textarea {
 }
 .bg-waiting {
   background-color: var(--waiting);
+}
+.bg-requirement {
+  background-color: var(--requirement);
+}
+.bg-statusValidade1 {
+  background-color: var(--statusValidade1);
+}
+.bg-statusValidade10 {
+  background-color: var(--statusValidade10);
 }
 
 /* 🎨 Utilitários de cor de texto */
@@ -195,4 +213,13 @@ textarea {
 }
 .border-waiting {
   border-color: var(--waiting);
+}
+.border-requirement {
+  border-color: var(--requirement);
+}
+.border-statusValidade1 {
+  border-color: var(--statusValidade1);
+}
+.border-statusValidade10 {
+  border-color: var(--statusValidade10);
 }

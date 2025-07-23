@@ -30,6 +30,11 @@ module.exports = {
         pending: "var(--pending)",
         notStarted: "var(--notStarted)",
         waiting: "var(--waiting)",
+
+        requirement: "var(--requirement)",
+
+        statusValidade1: "var(--statusValidade1)",
+        statusValidade10: "var(--statusValidade10)",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],
