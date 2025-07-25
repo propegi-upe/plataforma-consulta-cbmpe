@@ -1,7 +1,7 @@
 import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { ProcessEntity } from 'src/domain/entities/process.entity';
 import { ProcessesRepository } from 'src/domain/repositories/process.repository';
-import { GetRequestDto } from 'src/application/process/dtos/get-requests-by-user.dto';
+import { GetRequestDto } from 'src/application/process/dtos/get-request.dto';
 import { PROCESSES_REPOSITORY } from 'src/domain/repositories/tokens';
 
 export type GetRequestUseCaseResponse = {

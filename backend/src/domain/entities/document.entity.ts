@@ -11,7 +11,6 @@ export class DocumentEntity extends Base {
   public status: string; // 'status' is clear enough within the DocumentEntity context
   public digitalSignature: string;
 
-  // Foreign key for the relationship with Process (Process 1 ---- 0..* Document)
   public processId: string;
 
   constructor(

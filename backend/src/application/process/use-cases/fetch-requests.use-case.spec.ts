@@ -1,6 +1,6 @@
 import { InMemoryProcessesRepository } from 'src/infrastructure/database/in-memory/repositories/in-memory-processes.repository';
 import { ProcessFactory } from 'src/test/factories/process.factory';
-import { FetchRequestsUseCase } from './fetch-requests-by-user.use-case';
+import { FetchRequestsUseCase } from './fetch-requests.use-case';
 
 describe('FetchRequestsUseCase', () => {
   let processesRepository: InMemoryProcessesRepository;

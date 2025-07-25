@@ -1,6 +1,6 @@
 import { InMemoryEstablishmentsRepository } from 'src/infrastructure/database/in-memory/repositories/in-memory-establishments.repository';
 import { EstablishmentFactory } from 'src/test/factories/establishment.factory';
-import { FetchEnterprisesUseCase } from './fetch-enterprise-by-user.use-case';
+import { FetchEnterprisesUseCase } from './fetch-enterprise.use-case';
 import { EstablishmentEntity } from 'src/domain/entities/establishment.entity';
 
 describe('FetchEnterpriseByUserUseCase', () => {

@@ -1,6 +1,6 @@
 import { InMemoryEstablishmentsRepository } from 'src/infrastructure/database/in-memory/repositories/in-memory-establishments.repository';
 import { EstablishmentFactory } from 'src/test/factories/establishment.factory';
-import { GetEnterpriseUseCase } from './get-enterprise-by-user.use-case';
+import { GetEnterpriseUseCase } from './get-enterprise.use-case';
 import { NotFoundException } from '@nestjs/common';
 import { EstablishmentEntity } from 'src/domain/entities/establishment.entity';
 
@@ -66,8 +66,6 @@ describe('GetEnterpriseUseCase', () => {
       id: newEstablishment.id,
     });
 
-    expect(result.establishment.tradeName).toBe(
-      'Nome errado pra falha o teste',
-    ); // pra ele rodar tem que ser igual o de cima "Padaria do Povo"
+    expect(result.establishment.tradeName).toBe('Padaria do Povo'); // pra ele rodar tem que ser igual o de cima "Padaria do Povo"
   });
 });

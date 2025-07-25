@@ -1,6 +1,6 @@
 import { InMemoryProcessesRepository } from 'src/infrastructure/database/in-memory/repositories/in-memory-processes.repository';
 import { ProcessFactory } from 'src/test/factories/process.factory';
-import { GetRequestUseCase } from './get-requests-by-user.use-case';
+import { GetRequestUseCase } from './get-request.use-case';
 import { NotFoundException } from '@nestjs/common';
 import { ProcessEntity } from 'src/domain/entities/process.entity';
 

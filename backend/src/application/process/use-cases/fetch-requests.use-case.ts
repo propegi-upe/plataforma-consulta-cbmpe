@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ProcessEntity } from 'src/domain/entities/process.entity';
 import { ProcessesRepository } from 'src/domain/repositories/process.repository';
-import { FetchRequestsDto } from '../dtos/fetch-requests-by-user.dto';
+import { FetchRequestsDto } from '../dtos/fetch-requests.dto';
 import { PROCESSES_REPOSITORY } from 'src/domain/repositories/tokens';
 
 export type FetchRequestsUseCaseResponse = {
