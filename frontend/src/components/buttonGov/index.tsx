@@ -1,7 +1,7 @@
 import React from 'react';
 import gov from '@/assets/gov.png';
 import Image from 'next/image';
-import { useUserContext } from '@/contexts/UserContext';
+import { useUserContext } from '@/contexts';
 
 interface ButtonGovProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;

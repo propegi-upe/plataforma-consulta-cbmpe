@@ -1,11 +1,13 @@
 'use client';
 
-import { UserProvider } from '@/contexts/UserContext';
+import { UserProvider, DataProvider } from '@/contexts';
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <UserProvider>
-      <>{children}</>
+      <DataProvider>
+        <>{children}</>
+      </DataProvider>
     </UserProvider>
   );
 };

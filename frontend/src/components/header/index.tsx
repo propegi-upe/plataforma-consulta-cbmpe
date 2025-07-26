@@ -56,7 +56,9 @@ const Header: React.FC<Props> = ({}) => {
         />
         {isUserAuthenticated && (
           <>
-            <span onClick={() => setMenuAberto(true)}>Menu</span>
+            <span onClick={() => setMenuAberto(true)}>
+              <Image src={MenuImg} alt="Menu" width={24} height={24} />
+            </span>
             <Menu aberto={menuAberto} onClose={() => setMenuAberto(false)} />
           </>
         )}

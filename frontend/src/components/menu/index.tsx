@@ -1,11 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import CloseIcon from '@/assets/close.svg';
-import Link from 'next/link';
-import { useUserContext } from '@/contexts/UserContext';
 import Button from '../button';
+import { useUserContext } from '@/contexts';
 
 const ListaMenu = [
   {
@@ -80,7 +79,7 @@ const Menu: React.FC<MenuProps> = ({ aberto, onClose }) => {
         </nav>
 
         {/* Rodapé  */}
-        <div className="p-5 border-t border-gray-200">
+        <div className="p-5">
           <Button variant="outline" onClick={onLogout} className="w-full text-danger">
             Sair da conta
           </Button>

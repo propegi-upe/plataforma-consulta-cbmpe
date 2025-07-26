@@ -6,8 +6,8 @@ import ButtonGov from '@/components/buttonGov';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/button';
 import LineInfo from '@/components/lineInfo';
-import { useUserContext } from '@/contexts/UserContext';
 import Loading from '@/components/loading';
+import { useUserContext } from '@/contexts';
 
 export default function Home() {
   const router = useRouter();
@@ -47,7 +47,7 @@ export default function Home() {
             <Image src={logo} alt="Descrição da imagem" width={236} />
           </div>
           <p className="text-dark font-semibold text-center mb-4">
-            Entre com o gov.br e tenha acesso a solicitações e alvarás favoritados por você
+            Entre com o gov.br e tenha acesso a solicitações e AVCB favoritados por você
           </p>
           <ButtonGov className="border-none w-full" />
         </div>

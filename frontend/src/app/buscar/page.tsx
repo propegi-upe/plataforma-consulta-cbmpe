@@ -3,19 +3,38 @@
 import Button from '@/components/button';
 import Image from 'next/image';
 import buscar from '@/assets/buscar.png';
-import Input from '@/components/input';
-import { useEffect, useState } from 'react';
 import LineInfo from '@/components/lineInfo';
 import CardSolicitacao from './components/CardSolicitacao';
-import { Avcb, Solicitacao } from '@/types/cardsolicitacao';
 import { Tab, Tabs } from '@/components';
 import CardAvcb from './components/CardAvcb';
+import { useForm } from 'react-hook-form';
+import { useHookFormMask } from 'use-mask-input';
+import Loading from '@/components/loading';
+import { useUserContext, useDataContext } from '@/contexts';
+
+type FormValues = {
+  pesquisa: string;
+};
 
 export default function Search() {
-  const [textoPesquisa, setTextoPesquisa] = useState('');
-  const [dadosMocadosSolicitacoes, setDadosMocadosSolicitacoes] = useState<Solicitacao[]>([]);
-  const [dadosMocadosAVCB, setDadosMocadosAVCB] = useState<Avcb[]>([]);
-  const [activeTab, setActiveTab] = useState('Solicitações');
+  const { loadingUser } = useUserContext();
+  const {
+    dadosMocadosSolicitacoes,
+    dadosMocadosAVCB,
+    setDadosMocadosSolicitacoes,
+    setDadosMocadosAVCB,
+    setTextoPesquisa,
+    textoPesquisa,
+    activeTab,
+    setActiveTab,
+  } = useDataContext();
+  const { register, watch } = useForm<FormValues>({
+    defaultValues: { pesquisa: textoPesquisa || '' },
+    mode: 'onChange',
+  });
+  const registerWithMask = useHookFormMask(register);
+  const pesquisa = watch('pesquisa');
+  const isDataLoaded = dadosMocadosSolicitacoes.length > 0 || dadosMocadosAVCB.length > 0;
 
   const handleSearch = () => {
     setDadosMocadosSolicitacoes([
@@ -62,14 +81,12 @@ export default function Search() {
         validade: '2024-10-11',
       },
     ]);
+    setTextoPesquisa(pesquisa);
   };
 
-  useEffect(() => {
-    if (textoPesquisa === '') {
-      setDadosMocadosSolicitacoes([]);
-      setDadosMocadosAVCB([]);
-    }
-  }, [textoPesquisa]);
+  if (loadingUser) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -80,18 +97,18 @@ export default function Search() {
         />
 
         <div className="px-6">
-          <Input
-            onChange={(e) => setTextoPesquisa(e.target.value)}
-            id="search"
+          <input
+            {...registerWithMask('pesquisa', ['999.999.999-99', '99.999.999/9999-99'])}
+            type="text"
             placeholder="CPF, CNPJ, processo ou nome da empresa"
-            className="w-full  h-[50px] border-none bg-white text-dark px-4 py-2 rounded-lg font-medium shadow-md"
+            className="w-full h-[50px] border-none bg-white text-dark px-4 py-2 rounded-lg font-medium shadow-md"
           />
         </div>
         <div className="px-6">
           <Button
             variant="secondary"
             className="border-none w-full text-sm h-[50px] translate-y-[25px]"
-            disabled={textoPesquisa === ''}
+            disabled={pesquisa === ''}
             onClick={() => {
               handleSearch();
             }}
@@ -101,48 +118,54 @@ export default function Search() {
         </div>
       </div>
 
-      <div className="pt-16 px-6">
-        <Tabs activeKey={activeTab} onChange={setActiveTab} justify="justify-start">
-          <Tab title="Solicitações">
-            {dadosMocadosSolicitacoes.length > 0 ? (
-              <div className="display-flex">
-                {dadosMocadosSolicitacoes.map((item) => (
-                  <CardSolicitacao key={item.id} item={item} />
-                ))}
-              </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center  pt-24">
-                <div className="mb-8">
-                  <Image src={buscar} alt="buscar" width={168} />
+      {isDataLoaded ? (
+        <div className="pt-16 px-6">
+          <Tabs activeKey={activeTab} onChange={setActiveTab} justify="justify-start">
+            <Tab title="Solicitações">
+              {dadosMocadosSolicitacoes.length > 0 ? (
+                <div className="display-flex">
+                  {dadosMocadosSolicitacoes.map((item) => (
+                    <CardSolicitacao key={item.id} item={item} />
+                  ))}
                 </div>
-                <p className="text-[#d6d6d6] font-semibold text-center mb-4">
-                  Acesse informações sobre solicitações e AVCB de funcionamento dos locais que você
-                  visita.
-                </p>
-              </div>
-            )}
-          </Tab>
-          <Tab title="AVCB">
-            {dadosMocadosAVCB.length > 0 ? (
-              <div className="display-flex">
-                {dadosMocadosAVCB.map((item) => (
-                  <CardAvcb key={item.id} item={item} />
-                ))}
-              </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center pt-24">
-                <div className="mb-8">
-                  <Image src={buscar} alt="buscar" width={168} />
+              ) : (
+                <div className="flex flex-col items-center justify-center  pt-24">
+                  <p className="text-[#d6d6d6] font-semibold text-center mb-4">
+                    Acesse informações sobre solicitações e AVCB de funcionamento dos locais que
+                    você visita.
+                  </p>
                 </div>
-                <p className="text-[#d6d6d6] font-semibold text-center mb-4">
-                  Acesse informações sobre solicitações e AVCB de funcionamento dos locais que você
-                  visita.
-                </p>
-              </div>
-            )}
-          </Tab>
-        </Tabs>
-      </div>
+              )}
+            </Tab>
+            <Tab title="AVCB">
+              {dadosMocadosAVCB.length > 0 ? (
+                <div className="display-flex">
+                  {dadosMocadosAVCB.map((item) => (
+                    <CardAvcb key={item.id} item={item} />
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center pt-24">
+                  <p className="text-[#d6d6d6] font-semibold text-center mb-4">
+                    Acesse informações sobre solicitações e AVCB de funcionamento dos locais que
+                    você visita.
+                  </p>
+                </div>
+              )}
+            </Tab>
+          </Tabs>
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center  pt-24">
+          <div className="mb-8">
+            <Image src={buscar} alt="buscar" width={168} />
+          </div>
+          <p className="text-[#d6d6d6] font-semibold text-center mb-4">
+            Acesse informações sobre solicitações e AVCB de funcionamento dos locais que você
+            visita.
+          </p>
+        </div>
+      )}
     </>
   );
 }
