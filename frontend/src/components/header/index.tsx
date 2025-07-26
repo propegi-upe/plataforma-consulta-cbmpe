@@ -16,6 +16,7 @@ const Header: React.FC<Props> = ({}) => {
   const router = useRouter();
   const pathname = usePathname();
   const [menuAberto, setMenuAberto] = useState(false);
+  const isBuscarPage = useMemo(() => pathname.includes('/buscar/'), [pathname]);
 
   const handleVoltar = () => {
     router.back();
@@ -54,7 +55,7 @@ const Header: React.FC<Props> = ({}) => {
           className="cursor-pointer"
           onClick={handleVoltar}
         />
-        {isUserAuthenticated && (
+        {isUserAuthenticated && !isBuscarPage && (
           <>
             <span onClick={() => setMenuAberto(true)}>
               <Image src={MenuImg} alt="Menu" width={24} height={24} />

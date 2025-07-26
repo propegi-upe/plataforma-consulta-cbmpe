@@ -21,10 +21,17 @@ export default function Home() {
     <>
       <div className="bg-primary">
         {/* BOAS VINDAS DESLOGADO */}
-        <LineInfo
-          title={`Seja bem vindo ${user?.name || ''} ao Sistema Integrado de Acompanhamento de Processos do CBMPE`}
-          description="Acompanhe solicitações e processos de aprovação de projetos contra incêndio e pânico, e AVCB. Também tenha acesso aos AVCBs dos estabelecimentos do estado de Pernambuco."
-        />
+        {isUserAuthenticated ? (
+          <LineInfo
+            title={`Olá, ${user?.name}`}
+            description="Bem vindo ao Sistema Integrado de Acompanhamento de Processos do CBMPE. Acompanhe solicitações e tenha acesso a AVCB de funcionamento dos estabelecimentos do estado de Pernambuco."
+          />
+        ) : (
+          <LineInfo
+            title={`Seja bem vindo ao Sistema Integrado de Acompanhamento de Processos do CBMPE`}
+            description="Acompanhe solicitações e processos de aprovação de projetos contra incêndio e pânico, e AVCB. Também tenha acesso aos AVCBs dos estabelecimentos do estado de Pernambuco."
+          />
+        )}
 
         <div className="flex items-center justify-center px-6 pb-6">
           <Button

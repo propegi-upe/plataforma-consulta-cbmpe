@@ -9,7 +9,7 @@ const LineInfo = React.forwardRef<HTMLInputElement, InputProps>(
   ({ title, description, ...rest }, ref) => {
     return (
       <div className="px-6 pt-6">
-        <h1 className="mb-5 font-bold text-xl text-start text-white">{title}</h1>
+        <h1 className="mb-2 font-bold text-xl text-start text-white">{title}</h1>
         <p className="text-white text-sm mb-5">{description}</p>
       </div>
     );

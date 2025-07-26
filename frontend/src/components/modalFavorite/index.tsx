@@ -1,17 +1,23 @@
 import React, { useRef, useEffect } from 'react';
 import Button from '../button';
 import ButtonGov from '../buttonGov';
+import { useUserContext } from '@/contexts';
 
 type ModalFavoritarProps = {
   open: boolean;
   onClose: () => void;
   children?: React.ReactNode;
+  setFavorite: (value: boolean) => void;
 };
 
-export default function ModalFavoritar({ open, onClose, children }: ModalFavoritarProps) {
+export default function ModalFavoritar({
+  open,
+  onClose,
+  children,
+  setFavorite,
+}: ModalFavoritarProps) {
   const modalRef = useRef<HTMLDivElement>(null);
-  const logado = false;
-
+  const { isUserAuthenticated } = useUserContext();
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
@@ -38,21 +44,24 @@ export default function ModalFavoritar({ open, onClose, children }: ModalFavorit
         {children || (
           <div className="text-center flex flex-col items-center text-dark">
             <div className="bg-gray-200 w-25 h-2 rounded mb-8" />
-            {logado ? (
+            {isUserAuthenticated ? (
               <>
                 <span>Tem certeza que deseja remover esta solicitação do seus favoritos?</span>
                 <div className="flex flex-row gap-4">
                   <Button
                     variant="outlineAzul"
                     className="text-sm h-[40px] translate-y-[25px]"
-                    onClick={() => {}}
+                    onClick={() => {
+                      setFavorite && setFavorite(false);
+                      onClose();
+                    }}
                   >
                     Sim, remover
                   </Button>
                   <Button
                     variant="filledAzul"
                     className="text-sm h-[40px] translate-y-[25px]"
-                    onClick={() => {}}
+                    onClick={onClose}
                   >
                     Não remover
                   </Button>

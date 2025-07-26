@@ -15,8 +15,8 @@ const ButtonGov: React.FC<ButtonGovProps> = ({ className = '', type = 'button', 
 
   const handleLogin = () => {
     const mockUser = {
-      name: 'Fulano de Tal',
-      email: 'fulano@example.com',
+      name: 'Thiago',
+      email: 'thiago@example.com',
     };
     if (setUser) {
       setUser(mockUser);

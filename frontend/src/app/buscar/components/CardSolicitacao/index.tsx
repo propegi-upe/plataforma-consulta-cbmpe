@@ -5,7 +5,9 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import favoriteOutline from '@/assets/favoriteOutline.svg';
+import favoriteFilled from '@/assets/favoriteFilled.svg';
 import ModalFavoritar from '@/components/modalFavorite';
+import { useUserContext } from '@/contexts';
 
 const statusColorBorder: { [key: string]: string } = {
   'Em exigência': 'border-requirement',
@@ -33,6 +35,8 @@ type CardSolicitacaoProps = {
 };
 
 export default function CardSolicitacao({ item }: CardSolicitacaoProps) {
+  const { isUserAuthenticated } = useUserContext();
+  const [favorite, setFavorite] = useState(false);
   const { protocolo, dataAbertura, nome, cnpj, status } = item;
   const borda = `border-l-[10px] ${statusColorBorder[status] || 'border-gray-300'}`;
   const router = useRouter();
@@ -74,12 +78,20 @@ export default function CardSolicitacao({ item }: CardSolicitacaoProps) {
           />
           <div>
             <Image
-              src={favoriteOutline}
+              src={favorite ? favoriteFilled : favoriteOutline}
               alt="favoriteOutline"
               width={25}
               height={25}
               onClick={(e) => {
                 e.stopPropagation();
+                if (isUserAuthenticated) {
+                  if (favorite) {
+                    setModalFavoriteOpen(true);
+                  } else {
+                    setFavorite(!favorite);
+                  }
+                  return;
+                }
                 setModalFavoriteOpen(true);
               }}
               className="cursor-pointer hover:opacity-80"
@@ -87,7 +99,11 @@ export default function CardSolicitacao({ item }: CardSolicitacaoProps) {
           </div>
         </div>
       </div>
-      <ModalFavoritar open={modalFavoriteOpen} onClose={() => setModalFavoriteOpen(false)} />
+      <ModalFavoritar
+        open={modalFavoriteOpen}
+        onClose={() => setModalFavoriteOpen(false)}
+        setFavorite={setFavorite}
+      />
     </>
   );
 }

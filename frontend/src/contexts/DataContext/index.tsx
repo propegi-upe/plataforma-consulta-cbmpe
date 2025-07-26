@@ -1,6 +1,7 @@
 import { Avcb, Solicitacao } from '@/types/cardsolicitacao';
 import { usePathname } from 'next/navigation';
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { useUserContext } from '../UserContext';
 
 type DataContextType = {
   dadosMocadosSolicitacoes: Solicitacao[];
@@ -16,6 +17,7 @@ type DataContextType = {
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { isUserAuthenticated } = useUserContext();
   const pathname = usePathname();
   const [textoPesquisa, setTextoPesquisa] = useState('');
   const [dadosMocadosSolicitacoes, setDadosMocadosSolicitacoes] = useState<Solicitacao[]>([]);
@@ -29,6 +31,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setTextoPesquisa('');
     }
   }, [pathname]);
+
+  useEffect(() => {
+    if (!isUserAuthenticated) {
+      setDadosMocadosSolicitacoes([]);
+      setDadosMocadosAVCB([]);
+      setTextoPesquisa('');
+      setActiveTab('Solicitações');
+    }
+  }, [isUserAuthenticated]);
 
   const value = useMemo(
     () => ({

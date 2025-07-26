@@ -5,7 +5,9 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import Image from 'next/image';
 import favoriteOutline from '@/assets/favoriteOutline.svg';
+import favoriteFilled from '@/assets/favoriteFilled.svg';
 import ModalFavoritar from '@/components/modalFavorite';
+import { useUserContext } from '@/contexts';
 
 type CardAvcbProps = {
   key: number;
@@ -13,6 +15,8 @@ type CardAvcbProps = {
 };
 
 export default function CardAvcb({ item }: CardAvcbProps) {
+  const { isUserAuthenticated } = useUserContext();
+  const [favorite, setFavorite] = useState(false);
   const { nomeFantasia, endereco, validade } = item;
   const router = useRouter();
   const validadeBgColor = new Date(validade) < new Date() ? 'bg-gray' : 'bg-statusValidade1';
@@ -33,12 +37,20 @@ export default function CardAvcb({ item }: CardAvcbProps) {
       >
         <div className="mb-4">
           <Image
-            src={favoriteOutline}
+            src={favorite ? favoriteFilled : favoriteOutline}
             alt="favoriteOutline"
             width={25}
             height={25}
             onClick={(e) => {
               e.stopPropagation();
+              if (isUserAuthenticated) {
+                if (favorite) {
+                  setModalFavoriteOpen(true);
+                } else {
+                  setFavorite(!favorite);
+                }
+                return;
+              }
               setModalFavoriteOpen(true);
             }}
             className="cursor-pointer hover:opacity-80"
@@ -58,7 +70,11 @@ export default function CardAvcb({ item }: CardAvcbProps) {
           />
         </div>
       </div>
-      <ModalFavoritar open={modalFavoriteOpen} onClose={() => setModalFavoriteOpen(false)} />
+      <ModalFavoritar
+        open={modalFavoriteOpen}
+        onClose={() => setModalFavoriteOpen(false)}
+        setFavorite={setFavorite}
+      />
     </>
   );
 }
