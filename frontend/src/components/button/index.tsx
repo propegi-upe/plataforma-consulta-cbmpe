@@ -40,7 +40,7 @@ const Button: React.FC<ButtonProps> = ({
     white: 'bg-white text-dark border hover:!bg-[#a1a1a1] cursor-pointer',
     gray: 'bg-gray-200 text-dark border hover:!bg-[#e6f3ff] cursor-pointer',
     ghost: 'bg-white border border-blue-600 text-dark border hover:!bg-gray-300 cursor-pointer',
-    outline: 'bg-[#e6f3ff] text-dark cursor-pointer',
+    outline: 'bg-white cursor-pointer shadow-none border',
     filledAzul: 'bg-[#4897FA] text-white cursor-pointer',
     outlineAzul: 'bg-white text-[#4897FA] cursor-pointer shadow-none border border-[#4897FA]',
   };

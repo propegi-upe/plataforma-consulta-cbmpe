@@ -9,3 +9,5 @@ export * from './statusChip';
 export * from './modalFavorite';
 export * from './modalPortal';
 export * from './modalCustom';
+export * from './menu';
+export * from './loading';

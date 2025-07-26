@@ -76,7 +76,9 @@ export default function Details({ params, searchParams }: Props) {
               <CardHead itens={dadosMocados.itens} />
             </div>
             <div className="translate-y-[-35px]">
-              <span className="font-bold text-xl text-start text-dark">Atestado de Vistoria</span>
+              <span className="font-bold text-xl text-start text-dark">
+                Andamento da solicitação
+              </span>
               <CardRequest />
             </div>
             <div>
