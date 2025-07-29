@@ -10,7 +10,6 @@ import ModalFavoritar from '@/components/modalFavorite';
 import { useUserContext } from '@/contexts';
 
 type CardAvcbProps = {
-  key: number;
   item: Avcb;
 };
 

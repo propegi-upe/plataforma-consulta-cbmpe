@@ -30,7 +30,6 @@ const statusColorCircle: { [key: string]: string } = {
 };
 
 type CardSolicitacaoProps = {
-  key: number;
   item: Solicitacao;
 };
 
