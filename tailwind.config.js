@@ -12,6 +12,7 @@ module.exports = {
       colors: {
         white: "var(--white)",
         gray: "var(--gray)",
+        graySecondary: "var(--graySecondary)",
         dark: "var(--dark)",
 
         primary: "var(--primary)",

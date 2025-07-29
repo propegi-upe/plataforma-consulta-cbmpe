@@ -5,6 +5,7 @@
   --white: #ffffff;
   --dark: #171717;
   --gray: #f6f6f6;
+  --graySecondary: #ededed;
 
   /* Paleta principal */
   --primary: #9e6767;
@@ -69,6 +70,10 @@ input:focus {
 }
 .bg-gray {
   background-color: var(--gray);
+}
+
+.bg-graySecondary {
+  background-color: var(--graySecondary);
 }
 
 .bg-primary {

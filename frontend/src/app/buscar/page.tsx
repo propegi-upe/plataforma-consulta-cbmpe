@@ -62,15 +62,41 @@ export default function Search() {
 
       <>
         {isDataLoaded ? (
-          <div className="pt-16 px-6">
+          <div className="pt-12 px-6">
             <Tabs activeKey={activeTab} onChange={setActiveTab} justify="justify-start">
               <Tab title="Solicitações">
                 {dadosMocadosSolicitacoes.length > 0 ? (
-                  <div className="display-flex">
-                    {solicitacoesVisiveis.map((item) => (
-                      <CardSolicitacao key={`solicitacao-${item.id}`} item={item} />
-                    ))}
-                  </div>
+                  <>
+                    <div className="pb-4 flex gap-2 text-dark">
+                      <select
+                        value={''}
+                        onChange={() => {}}
+                        className="p-2 rounded w-[70px] h-[42px] bg-graySecondary  font-medium rounded-[20px] focus:outline-none focus:ring-0"
+                      >
+                        <option value="" disabled>
+                          Ano
+                        </option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                      </select>
+                      <select
+                        value={''}
+                        onChange={() => {}}
+                        className="p-2 rounded w-[85px] h-[42px] bg-graySecondary font-medium rounded-[20px] focus:outline-none focus:ring-0"
+                      >
+                        <option value="" disabled>
+                          Status
+                        </option>
+                        <option value="Em andamento">Em andamento</option>
+                        <option value="Em exigência">Em exigência</option>
+                      </select>
+                    </div>
+                    <div className="display-flex">
+                      {solicitacoesVisiveis.map((item) => (
+                        <CardSolicitacao key={`solicitacao-${item.id}`} item={item} />
+                      ))}
+                    </div>
+                  </>
                 ) : (
                   <div className="flex flex-col items-center justify-center  pt-24">
                     <p className="text-[#d6d6d6] font-semibold text-center mb-4">
@@ -82,11 +108,37 @@ export default function Search() {
               </Tab>
               <Tab title="AVCB">
                 {dadosMocadosAVCB.length > 0 ? (
-                  <div className="display-flex">
-                    {avcbVisiveis.map((item) => (
-                      <CardAvcb key={`avcb-${item.id}`} item={item} />
-                    ))}
-                  </div>
+                  <>
+                    <div className="pb-4 flex gap-2 text-dark">
+                      <select
+                        value={''}
+                        onChange={() => {}}
+                        className="p-2 rounded w-[70px] h-[42px] bg-graySecondary  font-medium rounded-[20px] focus:outline-none focus:ring-0"
+                      >
+                        <option value="" disabled>
+                          Ano
+                        </option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                      </select>
+                      <select
+                        value={''}
+                        onChange={() => {}}
+                        className="p-2 rounded w-[85px] h-[42px] bg-graySecondary font-medium rounded-[20px] focus:outline-none focus:ring-0"
+                      >
+                        <option value="" disabled>
+                          Status
+                        </option>
+                        <option value="Em andamento">Em andamento</option>
+                        <option value="Em exigência">Em exigência</option>
+                      </select>
+                    </div>
+                    <div className="display-flex">
+                      {avcbVisiveis.map((item) => (
+                        <CardAvcb key={`avcb-${item.id}`} item={item} />
+                      ))}
+                    </div>
+                  </>
                 ) : (
                   <div className="flex flex-col items-center justify-center pt-24">
                     <p className="text-[#d6d6d6] font-semibold text-center mb-4">
