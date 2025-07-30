@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypeormUserEntity } from './typeorm/entities/typeorm-user.entity';
+import { TypeormProjectEntity } from './typeorm/entities/typeorm-project.entity';
+// import { TypeormUserEntity } from './typeorm/entities/typeorm-user.entity';
 
 @Module({
   imports: [
@@ -21,8 +22,8 @@ import { TypeormUserEntity } from './typeorm/entities/typeorm-user.entity';
             testEnv ? 'DB_PASSWORD_TEST' : 'DB_PASSWORD',
           ),
           database: configService.get(testEnv ? 'DB_NAME_TEST' : 'DB_NAME'),
-          entities: [TypeormUserEntity],
-          synchronize: configService.get('NODE_ENV') !== 'production',
+          entities: [TypeormProjectEntity],
+          synchronize: false,
           logging: configService.get('NODE_ENV') === 'development',
         };
       },

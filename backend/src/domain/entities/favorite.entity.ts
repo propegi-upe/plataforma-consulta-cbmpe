@@ -6,14 +6,12 @@ export class FavoriteEntity extends Base {
 
   public favoriteType: string;
   public favoriteName: string;
-  public creationDate: Date;
 
   constructor(
     userId: string,
     processId: string,
     favoriteType: string,
     favoriteName: string,
-    creationDate: Date,
   ) {
     super();
     this.userId = userId;
@@ -21,6 +19,5 @@ export class FavoriteEntity extends Base {
 
     this.favoriteType = favoriteType;
     this.favoriteName = favoriteName;
-    this.creationDate = creationDate;
   }
 }
