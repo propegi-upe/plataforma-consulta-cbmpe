@@ -31,4 +31,4 @@ const ButtonGov: React.FC<ButtonGovProps> = ({ className = '', type = 'button', 
   );
 };
 
-export default ButtonGov;
+export { ButtonGov };

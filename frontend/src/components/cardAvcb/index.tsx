@@ -1,4 +1,5 @@
-import StatusChip from '@/components/statusChip';
+'use client';
+
 import { Avcb } from '@/types/cardsolicitacao';
 import { formatarData } from '@/utils/formData';
 import { useRouter } from 'next/navigation';
@@ -6,14 +7,15 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import favoriteOutline from '@/assets/favoriteOutline.svg';
 import favoriteFilled from '@/assets/favoriteFilled.svg';
-import ModalFavoritar from '@/components/modalFavorite';
 import { useUserContext } from '@/contexts';
+import { StatusChip } from '../statusChip';
+import { ModalFavorite } from '../modalFavorite';
 
 type CardAvcbProps = {
   item: Avcb;
 };
 
-export default function CardAvcb({ item }: CardAvcbProps) {
+const CardAvcb: React.FC<CardAvcbProps> = ({ item }) => {
   const { isUserAuthenticated } = useUserContext();
   const [favorite, setFavorite] = useState(false);
   const { nomeFantasia, endereco, validade } = item;
@@ -69,11 +71,13 @@ export default function CardAvcb({ item }: CardAvcbProps) {
           />
         </div>
       </div>
-      <ModalFavoritar
+      <ModalFavorite
         open={modalFavoriteOpen}
         onClose={() => setModalFavoriteOpen(false)}
         setFavorite={setFavorite}
       />
     </>
   );
-}
+};
+
+export { CardAvcb };

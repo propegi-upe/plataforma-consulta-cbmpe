@@ -1,3 +1,5 @@
+'use client';
+
 import { userData } from '@/types/user';
 import { localData } from '@/utils/localStorage';
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';

@@ -1,4 +1,5 @@
-import StatusChip from '@/components/statusChip';
+'use client';
+
 import { Solicitacao } from '@/types/cardsolicitacao';
 import { formatarData } from '@/utils/formData';
 import { useRouter } from 'next/navigation';
@@ -6,8 +7,9 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import favoriteOutline from '@/assets/favoriteOutline.svg';
 import favoriteFilled from '@/assets/favoriteFilled.svg';
-import ModalFavoritar from '@/components/modalFavorite';
 import { useUserContext } from '@/contexts';
+import { StatusChip } from '../statusChip';
+import { ModalFavorite } from '../modalFavorite';
 
 const statusColorBorder: { [key: string]: string } = {
   'Em exigência': 'border-requirement',
@@ -33,7 +35,7 @@ type CardSolicitacaoProps = {
   item: Solicitacao;
 };
 
-export default function CardSolicitacao({ item }: CardSolicitacaoProps) {
+const CardSolicitacao: React.FC<CardSolicitacaoProps> = ({ item }) => {
   const { isUserAuthenticated } = useUserContext();
   const [favorite, setFavorite] = useState(false);
   const { protocolo, dataAbertura, nome, cnpj, status } = item;
@@ -98,11 +100,13 @@ export default function CardSolicitacao({ item }: CardSolicitacaoProps) {
           </div>
         </div>
       </div>
-      <ModalFavoritar
+      <ModalFavorite
         open={modalFavoriteOpen}
         onClose={() => setModalFavoriteOpen(false)}
         setFavorite={setFavorite}
       />
     </>
   );
-}
+};
+
+export { CardSolicitacao };

@@ -1,3 +1,5 @@
+'use client';
+
 import { Avcb, Solicitacao } from '@/types/cardsolicitacao';
 import { usePathname } from 'next/navigation';
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';

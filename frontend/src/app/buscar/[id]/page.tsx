@@ -1,21 +1,16 @@
+'use client';
+
 import CardHead from './components/CardHead';
 import CardCertificate from './components/CardCertificate';
 import CardProgressHistory from './components/CardProgressHistory';
 import CardRequest from './components/CardRequest';
 import HeadDetails from './components/HeadDetails';
+import { useParams, useSearchParams } from 'next/navigation';
 
-type Props = {
-  params: {
-    id: string;
-  };
-  searchParams: {
-    type?: string;
-  };
-};
-
-export default function Details({ params, searchParams }: Props) {
-  const { id } = params;
-  const { type } = searchParams;
+export default function Details() {
+  const searchParams = useSearchParams();
+  const { id } = useParams();
+  const type = searchParams.get('type');
   const isAvcb = type === 'avcb';
   const isSolicitacao = type === 'solicitacao';
   const dadosMocados = {

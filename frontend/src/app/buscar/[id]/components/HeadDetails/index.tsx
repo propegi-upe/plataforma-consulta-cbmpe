@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import favoriteOutline from '@/assets/favoriteOutline.svg';
-import ModalFavoritar from '@/components/modalFavorite';
+import { ModalFavorite } from '@/components';
 
 type Props = {
   title: string;
@@ -30,7 +30,7 @@ export default function HeadDetails({ title }: Props) {
           />
         </div>
       </div>
-      <ModalFavoritar open={modalFavoriteOpen} onClose={() => setModalFavoriteOpen(false)} />
+      <ModalFavorite open={modalFavoriteOpen} onClose={() => setModalFavoriteOpen(false)} />
     </>
   );
 }

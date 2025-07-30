@@ -15,13 +15,13 @@ interface TabsProps {
     | 'justify-evenly';
 }
 
-export function Tabs({
+const Tabs: React.FC<TabsProps> = ({
   children,
   className,
   activeKey,
   onChange,
   justify = 'justify-evenly',
-}: TabsProps) {
+}) => {
   const activeIndex = children.findIndex((child) => child.props.title === activeKey);
 
   return (
@@ -48,4 +48,6 @@ export function Tabs({
       <div className="pt-4">{children[activeIndex]}</div>
     </div>
   );
-}
+};
+
+export { Tabs };

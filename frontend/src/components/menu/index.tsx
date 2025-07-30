@@ -3,23 +3,9 @@
 import React from 'react';
 import Image from 'next/image';
 import CloseIcon from '@/assets/close.svg';
-import Button from '../button';
 import { useUserContext } from '@/contexts';
-
-const ListaMenu = [
-  {
-    label: 'Solicitações favoritas',
-    onClick: () => {},
-  },
-  {
-    label: 'AVCBs favoritos',
-    onClick: () => {},
-  },
-  {
-    label: 'Site do CBMPE',
-    onClick: () => {},
-  },
-];
+import { useRouter } from 'next/navigation'; // Importação do router
+import { Button } from '../button';
 
 type MenuProps = {
   aberto: boolean;
@@ -28,12 +14,36 @@ type MenuProps = {
 
 const Menu: React.FC<MenuProps> = ({ aberto, onClose }) => {
   const { clearUser } = useUserContext();
+  const router = useRouter(); // Utilizando o hook
+
   const onLogout = () => {
     if (clearUser) {
       clearUser();
     }
     onClose();
   };
+
+  // Agora ListaMenu está dentro do componente para acessar o router
+  const ListaMenu = [
+    {
+      label: 'Início',
+      onClick: () => router.push('/'),
+    },
+    {
+      label: 'Solicitações favoritas',
+      onClick: () => router.push('/favoritos?type=solicitacao'),
+    },
+    {
+      label: 'AVCBs favoritos',
+      onClick: () => router.push('/favoritos?type=avcb'),
+    },
+    {
+      label: 'Site do CBMPE',
+      onClick: () => {
+        window.open('https://www.bombeiros.pe.gov.br/', '_blank');
+      },
+    },
+  ];
 
   return (
     <>
@@ -89,4 +99,4 @@ const Menu: React.FC<MenuProps> = ({ aberto, onClose }) => {
   );
 };
 
-export default Menu;
+export { Menu };

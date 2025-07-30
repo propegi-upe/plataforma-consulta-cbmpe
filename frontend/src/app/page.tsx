@@ -2,12 +2,9 @@
 
 import Image from 'next/image';
 import logo from '@/assets/logo.png';
-import ButtonGov from '@/components/buttonGov';
 import { useRouter } from 'next/navigation';
-import Button from '@/components/button';
-import LineInfo from '@/components/lineInfo';
-import Loading from '@/components/loading';
 import { useUserContext } from '@/contexts';
+import { Button, ButtonGov, LineInfo, Loading } from '@/components';
 
 export default function Home() {
   const router = useRouter();

@@ -1,4 +1,5 @@
-import Button from '@/components/button';
+'use client';
+
 import React, { useRef, useEffect } from 'react';
 
 type ModalFavoritarProps = {
@@ -7,7 +8,7 @@ type ModalFavoritarProps = {
   children?: React.ReactNode;
 };
 
-export default function ModalCustom({ open, onClose, children }: ModalFavoritarProps) {
+const ModalCustom: React.FC<ModalFavoritarProps> = ({ open, onClose, children }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -37,4 +38,6 @@ export default function ModalCustom({ open, onClose, children }: ModalFavoritarP
       </div>
     </div>
   );
-}
+};
+
+export { ModalCustom };

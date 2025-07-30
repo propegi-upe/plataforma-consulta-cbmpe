@@ -1,21 +1,18 @@
+'use client';
+
 import React, { useRef, useEffect } from 'react';
-import Button from '../button';
-import ButtonGov from '../buttonGov';
 import { useUserContext } from '@/contexts';
+import { ButtonGov } from '../buttonGov';
+import { Button } from '../button';
 
 type ModalFavoritarProps = {
   open: boolean;
   onClose: () => void;
   children?: React.ReactNode;
-  setFavorite: (value: boolean) => void;
+  setFavorite?: (value: boolean) => void;
 };
 
-export default function ModalFavoritar({
-  open,
-  onClose,
-  children,
-  setFavorite,
-}: ModalFavoritarProps) {
+const ModalFavorite: React.FC<ModalFavoritarProps> = ({ open, onClose, children, setFavorite }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const { isUserAuthenticated } = useUserContext();
   useEffect(() => {
@@ -82,4 +79,6 @@ export default function ModalFavoritar({
       </div>
     </div>
   );
-}
+};
+
+export { ModalFavorite };

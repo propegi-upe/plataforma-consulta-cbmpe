@@ -1,19 +1,19 @@
 'use client';
 import React from 'react';
 
-export function Tab({
-  children,
-  className,
-  onClick,
-}: {
-  children: React.ReactNode;
+interface TabProps {
   title: string;
   className?: string;
   onClick?: () => void;
-}) {
+  children?: React.ReactNode;
+}
+
+const Tab: React.FC<TabProps> = ({ title, className = '', onClick, children }) => {
   return (
     <div className={className} onClick={onClick}>
       {children}
     </div>
   );
-}
+};
+
+export { Tab };

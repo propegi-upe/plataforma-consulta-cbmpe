@@ -2,7 +2,9 @@ import { createPortal } from 'react-dom';
 
 import React from 'react';
 
-export default function ModalPortal({ children }: { children: React.ReactNode }) {
+const ModalPortal: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   if (typeof window === 'undefined') return null;
   return createPortal(children, document.body);
-}
+};
+
+export { ModalPortal };

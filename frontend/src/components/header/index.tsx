@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Logo from '@/assets/logo.png';
 import MenuImg from '@/assets/menu.svg';
 import { useUserContext } from '@/contexts/UserContext';
-import Menu from '../menu';
+import { Menu } from '../menu';
 
 interface Props {}
 
@@ -72,4 +72,4 @@ const Header: React.FC<Props> = ({}) => {
   );
 };
 
-export default Header;
+export { Header };

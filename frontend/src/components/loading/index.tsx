@@ -8,4 +8,4 @@ const Loading: React.FC<Props> = ({}) => {
   );
 };
 
-export default Loading;
+export { Loading };

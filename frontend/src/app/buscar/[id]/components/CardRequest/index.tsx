@@ -1,8 +1,7 @@
 'use client';
 
-import Button from '@/components/button';
-import StatusChip from '@/components/statusChip';
-import React, { useState } from 'react';
+import { StatusChip } from '@/components';
+import React from 'react';
 
 type Props = {};
 

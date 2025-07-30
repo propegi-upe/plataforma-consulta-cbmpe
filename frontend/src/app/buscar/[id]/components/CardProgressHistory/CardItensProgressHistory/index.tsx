@@ -1,10 +1,7 @@
 'use client';
 
+import { Button, ModalCustom, ModalPortal, StatusChip } from '@/components';
 import React, { useState } from 'react';
-import ModalPortal from '@/components/modalPortal';
-import Button from '@/components/button';
-import StatusChip from '@/components/statusChip';
-import ModalCustom from '@/components/modalCustom';
 
 type item = {
   title: string;

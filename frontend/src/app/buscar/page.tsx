@@ -1,13 +1,17 @@
 'use client';
 
-import Button from '@/components/button';
 import Image from 'next/image';
 import buscar from '@/assets/buscar.png';
-import LineInfo from '@/components/lineInfo';
-import CardSolicitacao from './components/CardSolicitacao';
-import { Tab, Tabs } from '@/components';
-import CardAvcb from './components/CardAvcb';
-import Loading from '@/components/loading';
+import {
+  Button,
+  CardAvcb,
+  CardSolicitacao,
+  CustomSelect,
+  LineInfo,
+  Loading,
+  Tab,
+  Tabs,
+} from '@/components';
 import { useSearch } from './hooks/useSearch';
 
 export default function Search() {
@@ -67,29 +71,25 @@ export default function Search() {
               <Tab title="Solicitações">
                 {dadosMocadosSolicitacoes.length > 0 ? (
                   <>
-                    <div className="pb-4 flex gap-2 text-dark">
-                      <select
+                    <div className="pb-4 flex gap-2">
+                      <CustomSelect
                         value={''}
                         onChange={() => {}}
-                        className="p-2 rounded w-[70px] h-[42px] bg-graySecondary  font-medium rounded-[20px] focus:outline-none focus:ring-0"
-                      >
-                        <option value="" disabled>
-                          Ano
-                        </option>
-                        <option value="2024">2024</option>
-                        <option value="2025">2025</option>
-                      </select>
-                      <select
+                        options={[
+                          { value: '', label: 'Ano' },
+                          { value: '2024', label: '2024' },
+                          { value: '2025', label: '2025' },
+                        ]}
+                      />
+                      <CustomSelect
                         value={''}
                         onChange={() => {}}
-                        className="p-2 rounded w-[85px] h-[42px] bg-graySecondary font-medium rounded-[20px] focus:outline-none focus:ring-0"
-                      >
-                        <option value="" disabled>
-                          Status
-                        </option>
-                        <option value="Em andamento">Em andamento</option>
-                        <option value="Em exigência">Em exigência</option>
-                      </select>
+                        options={[
+                          { value: '', label: 'Status' },
+                          { value: 'Em andamento', label: 'Em andamento' },
+                          { value: 'Em exigência', label: 'Em exigência' },
+                        ]}
+                      />
                     </div>
                     <div className="display-flex">
                       {solicitacoesVisiveis.map((item) => (

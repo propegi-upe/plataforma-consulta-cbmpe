@@ -11,3 +11,6 @@ export * from './modalPortal';
 export * from './modalCustom';
 export * from './menu';
 export * from './loading';
+export * from './customSelect';
+export * from './cardSolicitacao';
+export * from './cardAvcb';

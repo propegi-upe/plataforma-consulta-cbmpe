@@ -8,13 +8,13 @@ type StatusChipProps = {
   className?: string;
 };
 
-export default function StatusChip({
+const StatusChip: React.FC<StatusChipProps> = ({
   status,
   bgColor = 'bg-gray-300',
   textColor = 'text-black',
   circleColor = 'bg-gray-400',
-  className,
-}: StatusChipProps) {
+  className = '',
+}) => {
   return (
     <div
       className={`flex gap-2 items-center justify-center mt-2 ${bgColor} px-2 py-1 rounded-full ${textColor} ${className}`}
@@ -23,4 +23,6 @@ export default function StatusChip({
       <span>{status}</span>
     </div>
   );
-}
+};
+
+export { StatusChip };
