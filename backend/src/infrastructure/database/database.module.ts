@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeormProjectEntity } from './typeorm/entities/typeorm-project.entity';
+import { TypeormInspectionRequestEntity } from './typeorm/entities/typeorm-inspection.entity';
 // import { TypeormUserEntity } from './typeorm/entities/typeorm-user.entity';
 
 @Module({
@@ -22,7 +23,7 @@ import { TypeormProjectEntity } from './typeorm/entities/typeorm-project.entity'
             testEnv ? 'DB_PASSWORD_TEST' : 'DB_PASSWORD',
           ),
           database: configService.get(testEnv ? 'DB_NAME_TEST' : 'DB_NAME'),
-          entities: [TypeormProjectEntity],
+          entities: [TypeormProjectEntity, TypeormInspectionRequestEntity],
           synchronize: false,
           logging: configService.get('NODE_ENV') === 'development',
         };

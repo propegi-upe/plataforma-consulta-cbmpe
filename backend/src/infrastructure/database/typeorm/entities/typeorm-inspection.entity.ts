@@ -1,30 +1,33 @@
 import { Entity, Column, PrimaryColumn } from 'typeorm';
 
-@Entity({ name: 'tb_projt', schema: 'ovrsgat' })
-export class TypeormProjectEntity {
-  @PrimaryColumn({ name: 'id_projt', type: 'numeric' })
+@Entity({ name: 'tb_req_visto', schema: 'ovrsgat' })
+export class TypeormInspectionRequestEntity {
+  @PrimaryColumn({ name: 'id_req_visto', type: 'numeric' })
   id: number;
 
-  @Column({ name: 'id_ativ_econ_fk', type: 'numeric', nullable: true })
+  @Column({ name: 'id_projet_fk', type: 'numeric', nullable: true })
+  projectId: number;
+
+  @Column({ name: 'id_ativ_econ_fk', type: 'numeric' })
   economicActivityId: number;
 
-  @Column({ name: 'id_tipo_patrm_fk', type: 'numeric', nullable: true })
-  propertyTypeId: number;
+  @Column({ name: 'id_sitc_req_fk', type: 'numeric' })
+  requestSituationId: number;
 
   @Column({ name: 'id_tipo_edifi_fk', type: 'numeric', nullable: true })
   buildingTypeId: number;
 
-  @Column({ name: 'id_sitc_projt_fk', type: 'numeric' })
-  projectSituationId: number;
+  @Column({ name: 'id_tipo_patrm_fk', type: 'numeric', nullable: true })
+  propertyTypeId: number;
+
+  @Column({ name: 'id_risc_ocup_fk', type: 'numeric', nullable: true })
+  occupationRiskId: number;
 
   @Column({ name: 'id_sub_tipo_ocup_fk', type: 'numeric' })
   occupationSubTypeId: number;
 
   @Column({ name: 'id_tipo_ocup_fk', type: 'numeric' })
   occupationTypeId: number;
-
-  @Column({ name: 'id_risc_ocup_fk', type: 'numeric', nullable: true })
-  occupationRiskId: number;
 
   @Column({ name: 'id_usu_fk', type: 'numeric' })
   userId: number;
@@ -123,8 +126,11 @@ export class TypeormProjectEntity {
   @Column({ name: 'id_motiv_isent_tpei_fk', type: 'numeric', nullable: true })
   tpeiExemptionReasonId: number;
 
-  @Column({ name: 'db_obs', type: 'text', nullable: true })
-  observations: string;
+  @Column({ name: 'ds_obs_ar', type: 'text', nullable: true })
+  arObservation: string;
+
+  @Column({ name: 'ds_obs', type: 'text', nullable: true })
+  observation: string;
 
   @Column({ name: 'ic_stat', type: 'varchar', length: 1, nullable: true })
   statusIndicator: string;
@@ -150,7 +156,7 @@ export class TypeormProjectEntity {
   @Column({ name: 'ds_obs_endr', type: 'text', nullable: true })
   addressObservation: string;
 
-  @Column({ name: 'id_cidd_x_ome_fk', type: 'numeric' })
+  @Column({ name: 'id_cidd_x_ome_fk', type: 'numeric', nullable: true })
   cityOmeId: number;
 
   @Column({
@@ -186,15 +192,67 @@ export class TypeormProjectEntity {
   @Column({ name: 'id_ocupc_fk', type: 'numeric', nullable: true })
   occupationId: number;
 
-  @Column({ name: 'dt_carim', type: 'timestamp', nullable: true })
-  stampDate: Date;
+  @Column({ name: 'dt_emiss_avbc', type: 'timestamp', nullable: true })
+  avbcEmissionDate: Date;
+
+  @Column({ name: 'ic_sitc_avcb', type: 'varchar', length: 1, nullable: true })
+  avcbSituationIndicator: string;
+
+  @Column({
+    name: 'nr_protc_projt',
+    type: 'varchar',
+    length: 255,
+    nullable: true,
+  })
+  projectProtocolNumber: string;
 
   @Column({ name: 'nr_qtd_botij', type: 'numeric', nullable: true })
   gasBottleQuantity: number;
 
-  @Column({ name: 'ic_natz', type: 'varchar', length: 1, nullable: true })
-  nature: string;
+  @Column({
+    name: 'ic_event_abert',
+    type: 'varchar',
+    length: 1,
+    nullable: true,
+  })
+  isOpenEvent: string;
+
+  @Column({ name: 'nr_latd', type: 'varchar', length: 40, nullable: true })
+  latitude: string;
+
+  @Column({ name: 'nr_long', type: 'varchar', length: 40, nullable: true })
+  longitude: string;
 
   @Column({ name: 'ic_forma', type: 'varchar', length: 1, nullable: true })
   form: string;
+
+  @Column({
+    name: 'ic_termo_compr',
+    type: 'varchar',
+    length: 1,
+    nullable: true,
+  })
+  commitmentTerm: string;
+
+  @Column({
+    name: 'ds_obs_termo',
+    type: 'varchar',
+    length: 500,
+    nullable: true,
+  })
+  termObservation: string;
+
+  @Column({ name: 'dt_valid_termo', type: 'timestamp', nullable: true })
+  termValidityDate: Date;
+
+  @Column({ name: 'parecer_avcb', type: 'text', nullable: true })
+  avcbOpinion: string;
+
+  @Column({
+    name: 'nr_protc_condm',
+    type: 'varchar',
+    length: 20,
+    nullable: true,
+  })
+  condominiumProtocolNumber: string;
 }
