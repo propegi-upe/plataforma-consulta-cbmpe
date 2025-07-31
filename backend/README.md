@@ -1,6 +1,6 @@
-# API Template Service
+# API Consulta CBMPE
 
-Template de API em NestJS usando Clean Architecture, TypeORM e PostgreSQL.
+API Consulta CBMPE em NestJS usando Clean Architecture, TypeORM e PostgreSQL.
 
 ### Usar versão correta do Node:
 ```bash

@@ -18,7 +18,7 @@ export function swaggerConfig(app: INestApplication) {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('API CBMPE')
+    .setTitle('API CONSULTA CBMPE')
     .setVersion('1.0')
     .addApiKey(
       {
@@ -34,7 +34,7 @@ export function swaggerConfig(app: INestApplication) {
   const document = SwaggerModule.createDocument(app, config);
 
   SwaggerModule.setup('docs', app, document, {
-    customSiteTitle: 'TEMPLATE API',
+    customSiteTitle: 'API CONSULTA CBMPE',
     swaggerOptions: {
       filter: true,
       showRequestDuration: true,

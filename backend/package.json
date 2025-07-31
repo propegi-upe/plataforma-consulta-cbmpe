@@ -1,5 +1,5 @@
 {
-  "name": "api-cbmpe",
+  "name": "api-consulta-cbmpe",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -35,7 +35,7 @@
     "dayjs": "^1.11.13",
     "express-basic-auth": "^1.2.1",
     "helmet": "^8.0.0",
-    "pg": "^8.16.3",
+    "pg": "^8.16.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.24",

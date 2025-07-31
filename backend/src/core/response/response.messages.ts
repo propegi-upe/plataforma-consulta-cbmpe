@@ -6,10 +6,9 @@ export const RESPONSE = {
     API_KEY_REQUIRED: 'Chave de API é obrigatória',
     INVALID_API_KEY: 'Chave de API inválida',
   },
-  USERS: {
-    NOT_FOUND: 'Usuário não encontrado',
-    CREATED_SUCCESSFULLY: 'Usuário criado com sucesso',
-    UPDATED_SUCCESSFULLY: 'Usuário atualizado com sucesso',
-    FETCHED_SUCCESSFULLY: 'Usuários buscados com sucesso',
+  PROJECTS: {
+    FETCHED_SUCCESSFULLY: 'Projetos buscados com sucesso',
+    NOT_FOUND: 'Projeto não encontrado',
+    GET_SUCCESS: 'Projeto obtido com sucesso',
   },
 };
