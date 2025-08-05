@@ -14,3 +14,6 @@ export * from './loading';
 export * from './customSelect';
 export * from './cardSolicitacao';
 export * from './cardAvcb';
+export * from './titleHead';
+export * from './cardSolicitacaoFavorite';
+export * from './cardAvcbFavorite';

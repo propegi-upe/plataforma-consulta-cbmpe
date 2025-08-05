@@ -240,3 +240,7 @@ input:focus {
 .animate-modalFavoritar {
   animation: modalFavoritar 0.3s ease;
 }
+
+.react-multi-carousel-list {
+  padding: 0rem 0 1rem 0;
+}
