@@ -1,28 +1,39 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PROJECTS_REPOSITORY } from 'src/domain/repositories/tokens';
+import { ENTERPRISES_REPOSITORY } from 'src/domain/repositories/tokens';
+import { AVCB_DOCUMENTS_REPOSITORY } from 'src/domain/repositories/tokens';
 import { DatabaseModule } from './database/database.module';
-import { TypeormProjectEntity } from './database/typeorm/entities/typeorm-project.entity';
-import { TypeormProjectRepository } from './database/typeorm/repositories/typeorm-project.repository';
-import { TypeormRequirementEntity } from './database/typeorm/entities/typeorm-requirement.entity';
-import { TypeormRequirementRepository } from './database/typeorm/repositories/typeorm-requirement.repository';
-import { REQUIREMENTS_REPOSITORY } from 'src/domain/repositories/tokens';
+import { TypeormEnterpriseEntity } from './database/typeorm/entities/typeorm-enterprise.entity';
+import { TypeormEnterpriseRepository } from './database/typeorm/repositories/typeorm-enterprise.repository';
+import { TypeormRequestEntity } from './database/typeorm/entities/typeorm-request.entity';
+import { TypeormRequestRepository } from './database/typeorm/repositories/typeorm-request.repository';
+import { REQUESTS_REPOSITORY } from 'src/domain/repositories/tokens';
+import { TypeormavcbDocumentRepository } from './database/typeorm/repositories/typeorm-avcbDocument.repository';
+import { TypeormAvcbDocumentView } from './database/typeorm/entities/typeorm-avcbDocument.entity';
 
 const REPOSITORIES = [
   {
-    provide: PROJECTS_REPOSITORY,
-    useClass: TypeormProjectRepository,
+    provide: ENTERPRISES_REPOSITORY,
+    useClass: TypeormEnterpriseRepository,
   },
   {
-    provide: REQUIREMENTS_REPOSITORY,
-    useClass: TypeormRequirementRepository,
+    provide: REQUESTS_REPOSITORY,
+    useClass: TypeormRequestRepository,
+  },
+  {
+    provide: AVCB_DOCUMENTS_REPOSITORY,
+    useClass: TypeormavcbDocumentRepository,
   },
 ];
 
 @Module({
   imports: [
     DatabaseModule,
-    TypeOrmModule.forFeature([TypeormProjectEntity, TypeormRequirementEntity]),
+    TypeOrmModule.forFeature([
+      TypeormEnterpriseEntity,
+      TypeormRequestEntity,
+      TypeormAvcbDocumentView,
+    ]),
   ],
   providers: [...REPOSITORIES],
   exports: [...REPOSITORIES],

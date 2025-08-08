@@ -6,15 +6,21 @@ export const RESPONSE = {
     API_KEY_REQUIRED: 'Chave de API é obrigatória',
     INVALID_API_KEY: 'Chave de API inválida',
   },
-  PROJECTS: {
+  ENTERPRISES: {
     FETCHED_SUCCESSFULLY: 'Projetos buscados com sucesso',
     NOT_FOUND: 'Projeto não encontrado',
     GET_SUCCESS: 'Projeto obtido com sucesso',
+    FILTERED_SUCCESSFULLY: 'Projetos filtrados com sucesso',
   },
 
-  REQUIREMENTS: {
-    FETCHED_SUCCESSFULLY: 'Requisitos buscados com sucesso',
-    NOT_FOUND: 'Requisito não encontrado',
-    GET_SUCCESS: 'Requisito obtido com sucesso',
+  REQUESTS: {
+    FETCHED_SUCCESSFULLY: 'Requisições buscadas com sucesso',
+    NOT_FOUND: 'Requisição não encontrada',
+    GET_SUCCESS: 'Requisição obtida com sucesso',
+  },
+  AVCB_DOCUMENTS: {
+    FETCHED_SUCCESSFULLY: 'Documentos AVCB buscados com sucesso',
+    NOT_FOUND: 'Documento AVCB não encontrado',
+    GET_SUCCESS: 'Documento AVCB obtido com sucesso',
   },
 };

@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypeormProjectEntity } from './typeorm/entities/typeorm-project.entity';
-import { TypeormRequirementEntity } from './typeorm/entities/typeorm-requirement.entity';
+import { TypeormEnterpriseEntity } from './typeorm/entities/typeorm-enterprise.entity';
+import { TypeormRequestEntity } from './typeorm/entities/typeorm-request.entity';
+import { TypeormAvcbDocumentView } from './typeorm/entities/typeorm-avcbDocument.entity';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -16,7 +17,11 @@ import { TypeormRequirementEntity } from './typeorm/entities/typeorm-requirement
           username: configService.get('DB_USERNAME'),
           password: configService.get('DB_PASSWORD'),
           database: configService.get('DB_NAME'),
-          entities: [TypeormProjectEntity, TypeormRequirementEntity],
+          entities: [
+            TypeormEnterpriseEntity,
+            TypeormRequestEntity,
+            TypeormAvcbDocumentView,
+          ],
           synchronize: configService.get('TYPEORM_SYNCHRONIZE') === 'true',
           logging: configService.get('TYPEORM_LOGGING') === 'true',
         };
