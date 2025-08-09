@@ -21,14 +21,30 @@ export class InMemoryRequestsRepository implements RequestsRepository {
   }
 
   async findByNameOrCnpjOrCpf(query: { search: string }): Promise<Request[]> {
-    const search = query.search.toLowerCase();
-    return Array.from(this.requests.values()).filter(
-      (e) =>
-        (typeof e.nm_pess === 'string' &&
-          e.nm_pess.toLowerCase().includes(search)) ||
-        (typeof e.nr_cnpj === 'string' && e.nr_cnpj.includes(search)) ||
-        (typeof e.nr_cpf === 'string' && e.nr_cpf.includes(search)),
-    );
+    const search = query.search.trim();
+    // Protocolo: 6 dígitos numéricos
+    const isProtocolo = /^\d{6}$/.test(search);
+    // CPF: 11 dígitos numéricos
+    const isCpf = /^\d{11}$/.test(search);
+    // CNPJ: 14 dígitos numéricos
+    const isCnpj = /^\d{14}$/.test(search);
+
+    return Array.from(this.requests.values()).filter((e) => {
+      if (isProtocolo) {
+        return String(e.id_protc_fk) === search;
+      }
+      if (isCpf) {
+        return typeof e.nr_cpf === 'string' && e.nr_cpf === search;
+      }
+      if (isCnpj) {
+        return typeof e.nr_cnpj === 'string' && e.nr_cnpj === search;
+      }
+      // Se não for nenhum dos acima, busca por nome (case insensitive, contém)
+      if (typeof e.nm_razao_socl === 'string') {
+        return e.nm_razao_socl.toLowerCase().includes(search.toLowerCase());
+      }
+      return false;
+    });
   }
 
   async search(params: {

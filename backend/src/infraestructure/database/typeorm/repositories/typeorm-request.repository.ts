@@ -46,20 +46,32 @@ export class TypeormRequestRepository implements RequestsRepository {
   }
 
   async findByNameOrCnpjOrCpf(query: { search: string }): Promise<Request[]> {
-    const search = query.search;
-    const entities = await this.repository
-      .createQueryBuilder('request')
-      .where('request.nm_pess LIKE :search', { search: `%${search}%` })
-      .orWhere('request.nr_cnpj LIKE :search', { search: `%${search}%` })
-      .orWhere('request.nr_cpf LIKE :search', { search: `%${search}%` })
-      .getMany();
+    const search = query.search.trim();
+    const isProtocolo = /^\d{6}$/.test(search);
+    const isCpf = /^\d{11}$/.test(search);
+    const isCnpj = /^\d{14}$/.test(search);
 
+    const qb = this.repository.createQueryBuilder('request');
+
+    if (isProtocolo) {
+      qb.where('request.id_protc_fk = :search', { search });
+    } else if (isCpf) {
+      qb.where('request.nr_cpf = :search', { search });
+    } else if (isCnpj) {
+      qb.where('request.nr_cnpj = :search', { search });
+    } else {
+      qb.where('LOWER(request.nm_razao_socl) LIKE :search', {
+        search: `%${search.toLowerCase()}%`,
+      });
+    }
+
+    const entities = await qb.getMany();
     return entities.map(RequestMapper.toDomain);
   }
 
   async search(params: {
     id_protc_fk?: string;
-    nm_pess?: string;
+    nm_razao_socl?: string;
     nr_cpf?: string;
     nr_cnpj?: string;
     ds_titul_estab?: string;
@@ -71,9 +83,9 @@ export class TypeormRequestRepository implements RequestsRepository {
         id_protc_fk: params.id_protc_fk,
       });
     }
-    if (params.nm_pess) {
-      qb.andWhere('request.nm_pess LIKE :nm_pess', {
-        nm_pess: `%${params.nm_pess}%`,
+    if (params.nm_razao_socl) {
+      qb.andWhere('request.nm_razao_socl LIKE :nm_razao_socl', {
+        nm_razao_socl: `%${params.nm_razao_socl}%`,
       });
     }
     if (params.nr_cpf) {
