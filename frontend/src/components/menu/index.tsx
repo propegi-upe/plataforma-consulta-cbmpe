@@ -14,16 +14,16 @@ type MenuProps = {
 
 const Menu: React.FC<MenuProps> = ({ aberto, onClose }) => {
   const { clearUser } = useUserContext();
-  const router = useRouter(); // Utilizando o hook
+  const router = useRouter();
 
   const onLogout = () => {
     if (clearUser) {
       clearUser();
     }
+    router.push('/');
     onClose();
   };
 
-  // Agora ListaMenu está dentro do componente para acessar o router
   const ListaMenu = [
     {
       label: 'Início',

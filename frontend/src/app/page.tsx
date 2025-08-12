@@ -17,6 +17,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import React from 'react';
 import { mockAVCB, mockSolicitacoes } from '@/utils/searchMocks';
+import favorite from '@/assets/return-list-favorite.svg';
 
 export default function Home() {
   const router = useRouter();
@@ -72,19 +73,30 @@ export default function Home() {
               textHref="Ver todas"
               href="/favoritos?type=solicitacao"
             />
-            <div className="parent">
-              <Carousel
-                showDots={true}
-                arrows={false}
-                partialVisible={true}
-                dotListClass="custom-dot-list-style"
-                responsive={responsive}
-              >
-                {mockSolicitacoes.map((item) => (
-                  <CardSolicitacaoFavorite key={item.id} item={item} />
-                ))}
-              </Carousel>
-            </div>
+            {mockSolicitacoes.length === 0 ? (
+              <div className="flex flex-col items-center justify-center  pt-6">
+                <div className="mb-8">
+                  <Image src={favorite} alt="buscar" width={168} />
+                </div>
+                <p className="text-[#d6d6d6] font-semibold text-center mb-4">
+                  Você ainda não tem solicitações favoritas
+                </p>
+              </div>
+            ) : (
+              <div className="parent">
+                <Carousel
+                  showDots={true}
+                  arrows={false}
+                  partialVisible={true}
+                  dotListClass="custom-dot-list-style"
+                  responsive={responsive}
+                >
+                  {mockSolicitacoes.map((item) => (
+                    <CardSolicitacaoFavorite key={item.id} item={item} className="max-w-[250px]" />
+                  ))}
+                </Carousel>
+              </div>
+            )}
           </>
           <>
             <TitleHead
@@ -93,19 +105,30 @@ export default function Home() {
               href="/favoritos?type=avcb"
               className="mt-4 mb-4"
             />
-            <div className="parent">
-              <Carousel
-                showDots={true}
-                arrows={false}
-                partialVisible={true}
-                dotListClass="custom-dot-list-style"
-                responsive={responsive}
-              >
-                {mockAVCB.map((item) => (
-                  <CardAvcbFavorite key={item.id} item={item} />
-                ))}
-              </Carousel>
-            </div>
+            {mockAVCB.length === 0 ? (
+              <div className="flex flex-col items-center justify-center  pt-6">
+                <div className="mb-8">
+                  <Image src={favorite} alt="buscar" width={168} />
+                </div>
+                <p className="text-[#d6d6d6] font-semibold text-center mb-4">
+                  Você ainda não tem AVCB favoritas
+                </p>
+              </div>
+            ) : (
+              <div className="parent">
+                <Carousel
+                  showDots={true}
+                  arrows={false}
+                  partialVisible={true}
+                  dotListClass="custom-dot-list-style"
+                  responsive={responsive}
+                >
+                  {mockAVCB.map((item) => (
+                    <CardAvcbFavorite key={item.id} item={item} className="max-w-[250px]" />
+                  ))}
+                </Carousel>
+              </div>
+            )}
           </>
         </div>
       ) : (

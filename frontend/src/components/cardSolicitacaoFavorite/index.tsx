@@ -34,9 +34,10 @@ const statusColorCircle: { [key: string]: string } = {
 
 type CardSolicitacaoProps = {
   item: Solicitacao;
+  className?: string;
 };
 
-const CardSolicitacaoFavorite: React.FC<CardSolicitacaoProps> = ({ item }) => {
+const CardSolicitacaoFavorite: React.FC<CardSolicitacaoProps> = ({ item, className }) => {
   const { isUserAuthenticated } = useUserContext();
   const [favorite, setFavorite] = useState(false);
   const { protocolo, dataAbertura, nome, cnpj, status } = item;
@@ -47,7 +48,7 @@ const CardSolicitacaoFavorite: React.FC<CardSolicitacaoProps> = ({ item }) => {
   return (
     <>
       <div
-        className={`bg-white rounded-lg shadow-sm p-4 mb-4 ${borda} text-dark cursor-pointer hover:shadow-lg transition-all ml-2 max-w-[250px]`}
+        className={`bg-white rounded-lg shadow-sm p-4 mb-4 text-dark cursor-pointer hover:shadow-lg transition-all ml-2 ${className} ${borda}`}
         onClick={() => router.push(`/buscar/${item.id}?type=solicitacao`)}
       >
         <div className="flex flex-row items-center justify-between mb-4">
