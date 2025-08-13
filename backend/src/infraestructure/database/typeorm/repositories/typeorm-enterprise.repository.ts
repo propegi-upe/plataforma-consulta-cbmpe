@@ -20,37 +20,6 @@ export class TypeormEnterpriseRepository implements EnterprisesRepository {
       this.configService.get<number>('PAGINATION_DEFAULT_LIMIT') || 100;
   }
 
-  async findManyByCpf(cpf: string): Promise<Enterprise[]> {
-    const enterprises = await this.repository.find({ where: { cpf } });
-
-    return enterprises.map(EnterpriseMapper.toDomain);
-  }
-
-  async findManyByCnpj(cnpj: string): Promise<Enterprise[]> {
-    const enterprises = await this.repository.find({ where: { cnpj } });
-
-    return enterprises.map(EnterpriseMapper.toDomain);
-  }
-
-  async findManyByProtocolId(protocolId: number): Promise<Enterprise[]> {
-    const enterprises = await this.repository.find({ where: { protocolId } });
-
-    return enterprises.map(EnterpriseMapper.toDomain);
-  }
-
-  async findManyByPersonNameOrCorporateName(
-    searchText: string,
-  ): Promise<Enterprise[]> {
-    const enterprises = await this.repository.find({
-      where: [
-        { personName: ILike(`%${searchText}%`) },
-        { corporateName: ILike(`%${searchText}%`) },
-      ],
-    });
-
-    return enterprises.map(EnterpriseMapper.toDomain);
-  }
-
   async findById(id: number): Promise<Enterprise | null> {
     const enterpriseEntity = await this.repository.findOne({ where: { id } });
 
@@ -73,6 +42,37 @@ export class TypeormEnterpriseRepository implements EnterprisesRepository {
       take: limit,
       skip: offset,
     });
+
+    return enterprises.map(EnterpriseMapper.toDomain);
+  }
+
+  async findManyByCpf(cpf: string): Promise<Enterprise[]> {
+    const enterprises = await this.repository.find({ where: { cpf } });
+
+    return enterprises.map(EnterpriseMapper.toDomain);
+  }
+
+  async findManyByCnpj(cnpj: string): Promise<Enterprise[]> {
+    const enterprises = await this.repository.find({ where: { cnpj } });
+
+    return enterprises.map(EnterpriseMapper.toDomain);
+  }
+
+  async findManyByPersonNameOrCorporateName(
+    searchText: string,
+  ): Promise<Enterprise[]> {
+    const enterprises = await this.repository.find({
+      where: [
+        { personName: ILike(`%${searchText}%`) },
+        { corporateName: ILike(`%${searchText}%`) },
+      ],
+    });
+
+    return enterprises.map(EnterpriseMapper.toDomain);
+  }
+
+  async findManyByProtocolId(protocolId: number): Promise<Enterprise[]> {
+    const enterprises = await this.repository.find({ where: { protocolId } });
 
     return enterprises.map(EnterpriseMapper.toDomain);
   }
