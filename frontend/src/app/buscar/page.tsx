@@ -16,6 +16,7 @@ import {
 import { useSearch } from './hooks/useSearch';
 import { optionsStatus } from '@/utils/optionsStatus';
 import { useState } from 'react';
+import notSearch from '@/assets/not-search.svg';
 
 export default function Search() {
   const {
@@ -102,10 +103,12 @@ export default function Search() {
                   </>
                 )}
                 {dadosMocadosSolicitacoes.length === 0 && !searchLoading && (
-                  <div className="flex flex-col items-center justify-center  pt-24">
+                  <div className="flex flex-col items-center justify-center  pt-6">
+                    <div className="mb-8">
+                      <Image src={notSearch} alt="buscar" width={168} />
+                    </div>
                     <p className="text-[#d6d6d6] font-semibold text-center mb-4">
-                      Acesse informações sobre solicitações e AVCB de funcionamento dos locais que
-                      você visita.
+                      Não foi encontrado registros de solicitações para este estabelecimento.
                     </p>
                   </div>
                 )}
@@ -135,10 +138,12 @@ export default function Search() {
                 )}
 
                 {dadosMocadosAVCB.length === 0 && !searchLoading && (
-                  <div className="flex flex-col items-center justify-center pt-24">
+                  <div className="flex flex-col items-center justify-center  pt-6">
+                    <div className="mb-8">
+                      <Image src={notSearch} alt="buscar" width={168} />
+                    </div>
                     <p className="text-[#d6d6d6] font-semibold text-center mb-4">
-                      Acesse informações sobre solicitações e AVCB de funcionamento dos locais que
-                      você visita.
+                      Não foi encontrado registros de AVCB para este estabelecimento.
                     </p>
                   </div>
                 )}
