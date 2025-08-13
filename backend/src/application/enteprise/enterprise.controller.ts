@@ -1,11 +1,15 @@
-import { Controller, Param, ParseIntPipe, Get, Query } from '@nestjs/common';
-import { RESPONSE } from 'src/core/response/response.messages';
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
+import { ApiOperation, ApiQuery, ApiSecurity, ApiTags } from '@nestjs/swagger';
+
 import { FetchEnterprisesUseCase } from './use-cases/fetch-enterprises.use-case';
+import { GetEnterpriseUseCase } from './use-cases/get-enterprise.use-case';
+
 import { ApiResponses } from 'src/core/response/response.decorator';
 import { getResponseExamples } from 'src/core/response/response.examples';
-import { ApiOperation, ApiQuery, ApiSecurity, ApiTags } from '@nestjs/swagger';
+
+import { RESPONSE } from 'src/core/response/response.messages';
+
 import { PaginationFilterType } from 'src/core/types/filters.type';
-import { GetEnterpriseUseCase } from './use-cases/get-enterprise.use-case';
 
 @ApiTags('Enterprises')
 @ApiSecurity('Api-Key')
@@ -17,7 +21,13 @@ export class EnterpriseController {
   ) {}
 
   @ApiOperation({
-    summary: 'Buscar todos os blocos',
+    summary: 'Buscar empreendimentos',
+  })
+  @ApiQuery({
+    name: 'filter',
+    required: false,
+    description:
+      'Valor para buscar nos campos: CPF, CNPJ, nome da pessoa, nome da empresa ou protocolo',
   })
   @ApiQuery({ name: 'limit', required: false })
   @ApiQuery({ name: 'offset', required: false })
@@ -33,28 +43,7 @@ export class EnterpriseController {
   }
 
   @ApiOperation({
-    summary:
-      'Buscar Estabelecimentos filtrados por um único campo obrigatório (cpf, cnpj, nome, razão social ou protocolo)',
-  })
-  @ApiResponses(getResponseExamples('get-enterprise'))
-  @Get('filter')
-  @ApiQuery({
-    name: 'search',
-    required: true,
-    description: 'CPF, CNPJ, nome, razão social ou protocolo',
-  })
-  async getFiltered(@Query('search') search: string) {
-    const result =
-      await this.getEnterpriseUseCase.findByNameOrCnpjOrCpf(search);
-
-    return {
-      message: RESPONSE.ENTERPRISES.FILTERED_SUCCESSFULLY,
-      data: result,
-    };
-  }
-
-  @ApiOperation({
-    summary: 'Buscar um Estabelecimento específico',
+    summary: 'Obter um estabelecimento',
   })
   @ApiResponses(getResponseExamples('get-enterprise'))
   @Get(':id')

@@ -6,6 +6,13 @@ export class EnterpriseMapper {
   static toDomain(entity: TypeormEnterpriseEntity): Enterprise {
     return new Enterprise(
       entity.id,
+
+      entity.cpf,
+      entity.personName,
+      entity.cnpj,
+      entity.corporateName,
+      entity.protocolId,
+
       entity.economicActivityId,
       entity.propertyTypeId,
       entity.buildingTypeId,
@@ -15,10 +22,6 @@ export class EnterpriseMapper {
       entity.occupationRiskId,
       entity.userId,
       entity.personIndicator,
-      entity.cpf,
-      entity.personName,
-      entity.cnpj,
-      entity.corporateName,
       entity.establishmentTitle,
       entity.arTypeIndicator,
       entity.validityStartDate
@@ -44,7 +47,6 @@ export class EnterpriseMapper {
       entity.statusIndicator,
       entity.inclusionDate ? dayjs(entity.inclusionDate).toDate() : undefined,
       entity.updateDate ? dayjs(entity.updateDate).toDate() : undefined,
-      entity.protocolId,
       entity.taxExemptionReasonId,
       entity.isCondominium,
       entity.isCondominiumEstablished,

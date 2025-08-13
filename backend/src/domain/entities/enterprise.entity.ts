@@ -1,5 +1,12 @@
 export class Enterprise {
-  public id?: number;
+  public id: number;
+
+  public cpf?: string;
+  public personName?: string;
+  public cnpj?: string;
+  public corporateName?: string;
+  public protocolId?: number;
+
   public economicActivityId?: number;
   public propertyTypeId?: number;
   public buildingTypeId?: number;
@@ -9,10 +16,6 @@ export class Enterprise {
   public occupationRiskId?: number;
   public userId?: number;
   public personIndicator?: string;
-  public cpf?: string;
-  public personName?: string;
-  public cnpj?: string;
-  public corporateName?: string;
   public establishmentTitle?: string;
   public arTypeIndicator?: string;
   public validityStartDate?: Date;
@@ -34,7 +37,6 @@ export class Enterprise {
   public statusIndicator?: string;
   public inclusionDate?: Date;
   public updateDate?: Date;
-  public protocolId?: number;
   public taxExemptionReasonId?: number;
   public isCondominium?: string;
   public isCondominiumEstablished?: string;
@@ -52,7 +54,14 @@ export class Enterprise {
   public form?: string;
 
   constructor(
-    id?: number,
+    id: number,
+
+    cpf?: string,
+    personName?: string,
+    cnpj?: string,
+    corporateName?: string,
+    protocolId?: number,
+
     economicActivityId?: number,
     propertyTypeId?: number,
     buildingTypeId?: number,
@@ -62,10 +71,6 @@ export class Enterprise {
     occupationRiskId?: number,
     userId?: number,
     personIndicator?: string,
-    cpf?: string,
-    personName?: string,
-    cnpj?: string,
-    corporateName?: string,
     establishmentTitle?: string,
     arTypeIndicator?: string,
     validityStartDate?: Date,
@@ -87,7 +92,6 @@ export class Enterprise {
     statusIndicator?: string,
     inclusionDate?: Date,
     updateDate?: Date,
-    protocolId?: number,
     taxExemptionReasonId?: number,
     isCondominium?: string,
     isCondominiumEstablished?: string,
@@ -105,6 +109,13 @@ export class Enterprise {
     form?: string,
   ) {
     this.id = id;
+
+    this.cpf = cpf;
+    this.personName = personName;
+    this.cnpj = cnpj;
+    this.corporateName = corporateName;
+    this.protocolId = protocolId;
+
     this.economicActivityId = economicActivityId;
     this.propertyTypeId = propertyTypeId;
     this.buildingTypeId = buildingTypeId;
@@ -114,10 +125,6 @@ export class Enterprise {
     this.occupationRiskId = occupationRiskId;
     this.userId = userId;
     this.personIndicator = personIndicator;
-    this.cpf = cpf;
-    this.personName = personName;
-    this.cnpj = cnpj;
-    this.corporateName = corporateName;
     this.establishmentTitle = establishmentTitle;
     this.arTypeIndicator = arTypeIndicator;
     this.validityStartDate = validityStartDate;
@@ -139,7 +146,6 @@ export class Enterprise {
     this.statusIndicator = statusIndicator;
     this.inclusionDate = inclusionDate;
     this.updateDate = updateDate;
-    this.protocolId = protocolId;
     this.taxExemptionReasonId = taxExemptionReasonId;
     this.isCondominium = isCondominium;
     this.isCondominiumEstablished = isCondominiumEstablished;

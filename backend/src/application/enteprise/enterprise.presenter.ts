@@ -4,6 +4,13 @@ export class EnterprisePresenter {
   static toHTTP(enterprise: Enterprise) {
     return {
       id: enterprise.id,
+
+      cpf: enterprise.cpf,
+      personName: enterprise.personName,
+      cnpj: enterprise.cnpj,
+      corporateName: enterprise.corporateName,
+      protocolId: enterprise.protocolId,
+
       economicActivityId: enterprise.economicActivityId,
       propertyTypeId: enterprise.propertyTypeId,
       buildingTypeId: enterprise.buildingTypeId,
@@ -13,10 +20,6 @@ export class EnterprisePresenter {
       occupationRiskId: enterprise.occupationRiskId,
       userId: enterprise.userId,
       personIndicator: enterprise.personIndicator,
-      cpf: enterprise.cpf,
-      personName: enterprise.personName,
-      cnpj: enterprise.cnpj,
-      corporateName: enterprise.corporateName,
       establishmentTitle: enterprise.establishmentTitle,
       arTypeIndicator: enterprise.arTypeIndicator,
       validityStartDate: enterprise.validityStartDate,
@@ -38,7 +41,6 @@ export class EnterprisePresenter {
       statusIndicator: enterprise.statusIndicator,
       inclusionDate: enterprise.inclusionDate,
       updateDate: enterprise.updateDate,
-      protocolId: enterprise.protocolId,
       taxExemptionReasonId: enterprise.taxExemptionReasonId,
       isCondominium: enterprise.isCondominium,
       isCondominiumEstablished: enterprise.isCondominiumEstablished,

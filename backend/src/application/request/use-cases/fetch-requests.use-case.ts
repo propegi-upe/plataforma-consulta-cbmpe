@@ -1,12 +1,18 @@
 import { Request } from 'src/domain/entities/request.entity';
+
 import { RequestsRepository } from 'src/domain/repositories/request.repository';
 import { REQUESTS_REPOSITORY } from 'src/domain/repositories/tokens';
+
 import { Inject } from '@nestjs/common';
-import { RESPONSE } from 'src/core/response/response.messages';
-import { ResourceNotFound } from 'src/domain/errors/ResourceNotFound';
+
+import { detectFieldType } from 'src/utils';
 
 export type FetchRequestsUseCaseRequest = {
-  query: { limit?: number; offset?: number };
+  query: {
+    filter?: string;
+    limit?: number;
+    offset?: number;
+  };
 };
 
 export interface FetchRequestsUseCaseResponse {
@@ -22,34 +28,41 @@ export class FetchRequestsUseCase {
   async execute({
     query,
   }: FetchRequestsUseCaseRequest): Promise<FetchRequestsUseCaseResponse> {
-    const requests = await this.requestsRepository.findMany(query);
-    return { requests };
-  }
-  async findByNameOrCnpjOrCpf(
-    search: string,
-  ): Promise<{ requests: Request[] }> {
-    const requests = await this.requestsRepository.findByNameOrCnpjOrCpf({
-      search,
-    });
-    if (!requests || requests.length === 0) {
-      throw new ResourceNotFound(RESPONSE.REQUESTS.NOT_FOUND);
-    }
-    return { requests };
-  }
+    const { filter } = query;
 
-  async search(params: {
-    id_protc_fk?: string;
-    nm_pess?: string;
-    nr_cpf?: string;
-    nr_cnpj?: string;
-    ds_titul_estab?: string;
-    limit?: number;
-    offset?: number;
-  }): Promise<{ requests: Request[] }> {
-    const requests = await this.requestsRepository.search(params);
-    if (!requests || requests.length === 0) {
-      throw new ResourceNotFound(RESPONSE.REQUESTS.NOT_FOUND);
+    let requests: Request[] = [];
+
+    if (filter) {
+      const field = detectFieldType(filter);
+
+      switch (field) {
+        case 'cnpj':
+          requests = await this.requestsRepository.findManyByCnpj(filter);
+          break;
+
+        case 'cpf':
+          requests = await this.requestsRepository.findManyByCpf(filter);
+          break;
+
+        case 'text':
+          requests =
+            await this.requestsRepository.findManyByPersonNameOrCorporateName(
+              filter,
+            );
+          break;
+
+        case 'protocol':
+          requests = await this.requestsRepository.findManyByProtocolId(
+            Number(filter),
+          );
+          break;
+      }
+    } else {
+      requests = await this.requestsRepository.findMany(query);
     }
-    return { requests };
+
+    return {
+      requests,
+    };
   }
 }

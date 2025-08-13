@@ -4,8 +4,15 @@ import { TypeormRequestEntity } from '../entities/typeorm-request.entity';
 export class RequestMapper {
   static toDomain(entity: TypeormRequestEntity): Request {
     return new Request(
-      entity.id_req_visto,
+      entity.id,
+
+      entity.cpf,
+      entity.personName,
+      entity.cnpj,
+      entity.corporateName,
+      entity.protocolId,
       entity.id_projet_fk,
+
       entity.id_ativ_econ_fk,
       entity.id_sitc_req_fk,
       entity.id_tipo_edifi_fk,
@@ -15,10 +22,6 @@ export class RequestMapper {
       entity.id_tipo_ocup_fk,
       entity.id_usu_fk,
       entity.ic_pess,
-      entity.nr_cpf,
-      entity.nm_pess,
-      entity.nr_cnpj,
-      entity.nm_razao_socl,
       entity.ds_titul_estab,
       entity.ic_tipo_ar,
       entity.dt_ini_valid ? dayjs(entity.dt_ini_valid).toDate() : undefined,
@@ -41,7 +44,6 @@ export class RequestMapper {
       entity.ic_stat,
       entity.dt_incl ? dayjs(entity.dt_incl).toDate() : undefined,
       entity.dt_atlz ? dayjs(entity.dt_atlz).toDate() : undefined,
-      entity.id_protc_fk,
       entity.id_motiv_isent_tax_fk,
       entity.ic_condm,
       entity.ic_esta_condm,

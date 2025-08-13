@@ -3,7 +3,22 @@ import { Entity, Column, PrimaryColumn } from 'typeorm';
 @Entity({ name: 'tb_projt', schema: 'ovrsgat' })
 export class TypeormEnterpriseEntity {
   @PrimaryColumn({ name: 'id_projt' })
-  id?: number;
+  id: number;
+
+  @Column({ name: 'nr_cpf' })
+  cpf?: string;
+
+  @Column({ name: 'nm_pess' })
+  personName?: string;
+
+  @Column({ name: 'nr_cnpj' })
+  cnpj?: string;
+
+  @Column({ name: 'nm_razao_socl' })
+  corporateName?: string;
+
+  @Column({ name: 'id_protc_fk' })
+  protocolId?: number;
 
   @Column({ name: 'id_ativ_econ_fk' })
   economicActivityId?: number;
@@ -31,18 +46,6 @@ export class TypeormEnterpriseEntity {
 
   @Column({ name: 'ic_pess' })
   personIndicator?: string;
-
-  @Column({ name: 'nr_cpf' })
-  cpf?: string;
-
-  @Column({ name: 'nm_pess' })
-  personName?: string;
-
-  @Column({ name: 'nr_cnpj' })
-  cnpj?: string;
-
-  @Column({ name: 'nm_razao_socl' })
-  corporateName?: string;
 
   @Column({ name: 'ds_titul_estab' })
   establishmentTitle?: string;
@@ -106,9 +109,6 @@ export class TypeormEnterpriseEntity {
 
   @Column({ name: 'dt_atlz' })
   updateDate?: Date;
-
-  @Column({ name: 'id_protc_fk' })
-  protocolId?: number;
 
   @Column({ name: 'id_motiv_isent_tax_fk' })
   taxExemptionReasonId?: number;

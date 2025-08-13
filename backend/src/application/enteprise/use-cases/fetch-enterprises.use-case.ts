@@ -1,10 +1,18 @@
-import { EnterprisesRepository } from 'src/domain/repositories/enterprise.repository';
 import { Enterprise } from 'src/domain/entities/enterprise.entity';
+
+import { EnterprisesRepository } from 'src/domain/repositories/enterprise.repository';
 import { ENTERPRISES_REPOSITORY } from 'src/domain/repositories/tokens';
+
 import { Inject } from '@nestjs/common';
 
+import { detectFieldType } from 'src/utils';
+
 export type FetchEnterprisesUseCaseRequest = {
-  query: { limit?: number; offset?: number };
+  query: {
+    filter?: string;
+    limit?: number;
+    offset?: number;
+  };
 };
 
 export interface FetchEnterprisesUseCaseResponse {
@@ -20,7 +28,41 @@ export class FetchEnterprisesUseCase {
   async execute({
     query,
   }: FetchEnterprisesUseCaseRequest): Promise<FetchEnterprisesUseCaseResponse> {
-    const enterprises = await this.enterprisesRepository.findMany(query);
-    return { enterprises };
+    const { filter } = query;
+
+    let enterprises: Enterprise[] = [];
+
+    if (filter) {
+      const field = detectFieldType(filter);
+
+      switch (field) {
+        case 'cnpj':
+          enterprises = await this.enterprisesRepository.findManyByCnpj(filter);
+          break;
+
+        case 'cpf':
+          enterprises = await this.enterprisesRepository.findManyByCpf(filter);
+          break;
+
+        case 'text':
+          enterprises =
+            await this.enterprisesRepository.findManyByPersonNameOrCorporateName(
+              filter,
+            );
+          break;
+
+        case 'protocol':
+          enterprises = await this.enterprisesRepository.findManyByProtocolId(
+            Number(filter),
+          );
+          break;
+      }
+    } else {
+      enterprises = await this.enterprisesRepository.findMany(query);
+    }
+
+    return {
+      enterprises,
+    };
   }
 }

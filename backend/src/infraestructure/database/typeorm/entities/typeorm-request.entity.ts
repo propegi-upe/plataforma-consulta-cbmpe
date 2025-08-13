@@ -3,7 +3,22 @@ import { Entity, PrimaryColumn, Column } from 'typeorm';
 @Entity({ name: 'tb_req_visto', schema: 'ovrsgat' })
 export class TypeormRequestEntity {
   @PrimaryColumn({ name: 'id_req_visto' })
-  id_req_visto?: string;
+  id: number;
+
+  @Column({ name: 'nr_cpf' })
+  cpf?: string;
+
+  @Column({ name: 'nm_pess' })
+  personName?: string;
+
+  @Column({ name: 'nr_cnpj' })
+  cnpj?: string;
+
+  @Column({ name: 'nm_razao_socl' })
+  corporateName?: string;
+
+  @Column({ name: 'id_protc_fk' })
+  protocolId?: number;
 
   @Column({ name: 'id_projet_fk' })
   id_projet_fk?: string;
@@ -34,18 +49,6 @@ export class TypeormRequestEntity {
 
   @Column({ name: 'ic_pess' })
   ic_pess?: string;
-
-  @Column({ name: 'nr_cpf' })
-  nr_cpf?: string;
-
-  @Column({ name: 'nm_pess' })
-  nm_pess?: string;
-
-  @Column({ name: 'nr_cnpj' })
-  nr_cnpj?: string;
-
-  @Column({ name: 'nm_razao_socl' })
-  nm_razao_socl?: string;
 
   @Column({ name: 'ds_titul_estab' })
   ds_titul_estab?: string;
@@ -112,9 +115,6 @@ export class TypeormRequestEntity {
 
   @Column({ name: 'dt_atlz' })
   dt_atlz?: Date;
-
-  @Column({ name: 'id_protc_fk' })
-  id_protc_fk?: string;
 
   @Column({ name: 'id_motiv_isent_tax_fk' })
   id_motiv_isent_tax_fk?: string;

@@ -1,7 +1,14 @@
 import { Request } from 'src/domain/entities/request.entity';
 export function makeRequestData(data: Partial<Request> = {}): Request {
   return {
-    id_req_visto: data.id_req_visto ?? '1',
+    id: data.id ?? 1,
+
+    cpf: data.cpf ?? '00000000000',
+    personName: data.personName ?? 'Nome Pessoa',
+    cnpj: data.cnpj ?? '00000000000000',
+    corporateName: data.corporateName ?? 'Razão Social',
+    protocolId: data.protocolId ?? 1,
+
     id_projet_fk: data.id_projet_fk ?? '1',
     id_ativ_econ_fk: data.id_ativ_econ_fk ?? '1',
     id_sitc_req_fk: data.id_sitc_req_fk ?? '1',
@@ -12,10 +19,6 @@ export function makeRequestData(data: Partial<Request> = {}): Request {
     id_tipo_ocup_fk: data.id_tipo_ocup_fk ?? '1',
     id_usu_fk: data.id_usu_fk ?? '1',
     ic_pess: data.ic_pess ?? 'A',
-    nr_cpf: data.nr_cpf ?? '00000000000',
-    nm_pess: data.nm_pess ?? 'Nome Pessoa',
-    nr_cnpj: data.nr_cnpj ?? '00000000000000',
-    nm_razao_socl: data.nm_razao_socl ?? 'Razão Social',
     ds_titul_estab: data.ds_titul_estab ?? 'Título Estab',
     ic_tipo_ar: data.ic_tipo_ar ?? 'A',
     dt_ini_valid: data.dt_ini_valid ?? new Date(),
@@ -38,7 +41,6 @@ export function makeRequestData(data: Partial<Request> = {}): Request {
     ic_stat: data.ic_stat ?? 'A',
     dt_incl: data.dt_incl ?? new Date(),
     dt_atlz: data.dt_atlz ?? new Date(),
-    id_protc_fk: data.id_protc_fk ?? '1',
     id_motiv_isent_tax_fk: data.id_motiv_isent_tax_fk ?? '1',
     ic_condm: data.ic_condm ?? 'N',
     ic_esta_condm: data.ic_esta_condm ?? 'N',

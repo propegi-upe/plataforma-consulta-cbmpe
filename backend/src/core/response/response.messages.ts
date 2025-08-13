@@ -7,16 +7,16 @@ export const RESPONSE = {
     INVALID_API_KEY: 'Chave de API inválida',
   },
   ENTERPRISES: {
-    FETCHED_SUCCESSFULLY: 'Projetos buscados com sucesso',
-    NOT_FOUND: 'Projeto não encontrado',
-    GET_SUCCESS: 'Projeto obtido com sucesso',
-    FILTERED_SUCCESSFULLY: 'Projetos filtrados com sucesso',
+    FETCHED_SUCCESSFULLY: 'Empreendimentos buscados com sucesso',
+    NOT_FOUND: 'Empreendimento não encontrado',
+    GET_SUCCESS: 'Empreendimento obtido com sucesso',
+    FILTERED_SUCCESSFULLY: 'Empreendimentos filtrados com sucesso',
   },
 
   REQUESTS: {
-    FETCHED_SUCCESSFULLY: 'Requisições buscadas com sucesso',
-    NOT_FOUND: 'Requisição não encontrada',
-    GET_SUCCESS: 'Requisição obtida com sucesso',
+    FETCHED_SUCCESSFULLY: 'Solicitações buscadas com sucesso',
+    NOT_FOUND: 'Solicitação não encontrada',
+    GET_SUCCESS: 'Solicitação obtida com sucesso',
   },
   AVCB_DOCUMENTS: {
     FETCHED_SUCCESSFULLY: 'Documentos AVCB buscados com sucesso',

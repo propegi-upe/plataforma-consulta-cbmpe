@@ -2,7 +2,14 @@ import { Request } from 'src/domain/entities/request.entity';
 export class RequestPresenter {
   static toHTTP(request: Request) {
     return {
-      idReqVisto: request.id_req_visto,
+      id: request.id,
+
+      cpf: request.cpf,
+      personName: request.personName,
+      cnpj: request.cnpj,
+      corporateName: request.corporateName,
+      protocolId: request.protocolId,
+
       projectId: request.id_projet_fk,
       economicActivityId: request.id_ativ_econ_fk,
       requestSituationId: request.id_sitc_req_fk,
@@ -13,10 +20,6 @@ export class RequestPresenter {
       occupationTypeId: request.id_tipo_ocup_fk,
       userId: request.id_usu_fk,
       personIndicator: request.ic_pess,
-      cpf: request.nr_cpf,
-      personName: request.nm_pess,
-      cnpj: request.nr_cnpj,
-      corporateName: request.nm_razao_socl,
       establishmentTitle: request.ds_titul_estab,
       arTypeIndicator: request.ic_tipo_ar,
       validityStartDate: request.dt_ini_valid,
@@ -39,7 +42,6 @@ export class RequestPresenter {
       statusIndicator: request.ic_stat,
       inclusionDate: request.dt_incl,
       updateDate: request.dt_atlz,
-      protocolId: request.id_protc_fk,
       taxExemptionReasonId: request.id_motiv_isent_tax_fk,
       isCondominium: request.ic_condm,
       isCondominiumEstablished: request.ic_esta_condm,

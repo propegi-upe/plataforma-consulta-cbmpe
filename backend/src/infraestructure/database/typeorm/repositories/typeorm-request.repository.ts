@@ -1,5 +1,5 @@
 import { RequestsRepository } from 'src/domain/repositories/request.repository';
-import type { Repository } from 'typeorm';
+import { ILike, type Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeormRequestEntity } from '../entities/typeorm-request.entity';
 import { Request } from 'src/domain/entities/request.entity';
@@ -18,6 +18,37 @@ export class TypeormRequestRepository implements RequestsRepository {
   ) {
     this.paginationLimit =
       this.configService.get<number>('PAGINATION_DEFAULT_LIMIT') || 100;
+  }
+
+  async findManyByCpf(cpf: string): Promise<Request[]> {
+    const requests = await this.repository.find({ where: { cpf } });
+
+    return requests.map(RequestMapper.toDomain);
+  }
+
+  async findManyByCnpj(cnpj: string): Promise<Request[]> {
+    const requests = await this.repository.find({ where: { cnpj } });
+
+    return requests.map(RequestMapper.toDomain);
+  }
+
+  async findManyByProtocolId(protocolId: number): Promise<Request[]> {
+    const requests = await this.repository.find({ where: { protocolId } });
+
+    return requests.map(RequestMapper.toDomain);
+  }
+
+  async findManyByPersonNameOrCorporateName(
+    searchText: string,
+  ): Promise<Request[]> {
+    const requests = await this.repository.find({
+      where: [
+        { personName: ILike(`%${searchText}%`) },
+        { corporateName: ILike(`%${searchText}%`) },
+      ],
+    });
+
+    return requests.map(RequestMapper.toDomain);
   }
 
   async findMany(query: {
@@ -39,68 +70,8 @@ export class TypeormRequestRepository implements RequestsRepository {
   }
 
   async findById(id: number): Promise<Request | null> {
-    const request = await this.repository.findOneBy({
-      id_protc_fk: String(id),
-    });
+    const request = await this.repository.findOne({ where: { id } });
+
     return request ? RequestMapper.toDomain(request) : null;
-  }
-
-  async findByNameOrCnpjOrCpf(query: { search: string }): Promise<Request[]> {
-    const search = query.search.trim();
-    const isProtocolo = /^\d{6}$/.test(search);
-    const isCpf = /^\d{11}$/.test(search);
-    const isCnpj = /^\d{14}$/.test(search);
-
-    const qb = this.repository.createQueryBuilder('request');
-
-    if (isProtocolo) {
-      qb.where('request.id_protc_fk = :search', { search });
-    } else if (isCpf) {
-      qb.where('request.nr_cpf = :search', { search });
-    } else if (isCnpj) {
-      qb.where('request.nr_cnpj = :search', { search });
-    } else {
-      qb.where('LOWER(request.nm_razao_socl) LIKE :search', {
-        search: `%${search.toLowerCase()}%`,
-      });
-    }
-
-    const entities = await qb.getMany();
-    return entities.map(RequestMapper.toDomain);
-  }
-
-  async search(params: {
-    id_protc_fk?: string;
-    nm_razao_socl?: string;
-    nr_cpf?: string;
-    nr_cnpj?: string;
-    ds_titul_estab?: string;
-  }): Promise<Request[]> {
-    const qb = this.repository.createQueryBuilder('request');
-
-    if (params.id_protc_fk) {
-      qb.andWhere('request.id_protc_fk = :id_protc_fk', {
-        id_protc_fk: params.id_protc_fk,
-      });
-    }
-    if (params.nm_razao_socl) {
-      qb.andWhere('request.nm_razao_socl LIKE :nm_razao_socl', {
-        nm_razao_socl: `%${params.nm_razao_socl}%`,
-      });
-    }
-    if (params.nr_cpf) {
-      qb.andWhere('request.nr_cpf = :nr_cpf', { nr_cpf: params.nr_cpf });
-    }
-    if (params.nr_cnpj) {
-      qb.andWhere('request.nr_cnpj = :nr_cnpj', { nr_cnpj: params.nr_cnpj });
-    }
-    if (params.ds_titul_estab) {
-      qb.andWhere('request.ds_titul_estab LIKE :ds_titul_estab', {
-        ds_titul_estab: `%${params.ds_titul_estab}%`,
-      });
-    }
-
-    const entities = await qb.getMany();
-    return entities.map(RequestMapper.toDomain);
   }
 }

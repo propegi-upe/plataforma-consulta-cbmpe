@@ -1,5 +1,12 @@
 export class Request {
-  public id_req_visto?: string;
+  public id: number;
+
+  public cpf?: string;
+  public personName?: string;
+  public cnpj?: string;
+  public corporateName?: string;
+  public protocolId?: number;
+
   public id_projet_fk?: string;
   public id_ativ_econ_fk?: string;
   public id_sitc_req_fk?: string;
@@ -10,10 +17,7 @@ export class Request {
   public id_tipo_ocup_fk?: string;
   public id_usu_fk?: string;
   public ic_pess?: string;
-  public nr_cpf?: string;
-  public nm_pess?: string;
-  public nr_cnpj?: string;
-  public nm_razao_socl?: string;
+
   public ds_titul_estab?: string;
   public ic_tipo_ar?: string;
   public dt_ini_valid?: Date;
@@ -36,7 +40,6 @@ export class Request {
   public ic_stat?: string;
   public dt_incl?: Date;
   public dt_atlz?: Date;
-  public id_protc_fk?: string;
   public id_motiv_isent_tax_fk?: string;
   public ic_condm?: string;
   public ic_esta_condm?: string;
@@ -63,7 +66,14 @@ export class Request {
   public nr_protc_condm?: string;
 
   constructor(
-    id_req_visto?: string,
+    id: number,
+
+    cpf?: string,
+    personName?: string,
+    cnpj?: string,
+    corporateName?: string,
+    protocolId?: number,
+
     id_projet_fk?: string,
     id_ativ_econ_fk?: string,
     id_sitc_req_fk?: string,
@@ -74,10 +84,6 @@ export class Request {
     id_tipo_ocup_fk?: string,
     id_usu_fk?: string,
     ic_pess?: string,
-    nr_cpf?: string,
-    nm_pess?: string,
-    nr_cnpj?: string,
-    nm_razao_socl?: string,
     ds_titul_estab?: string,
     ic_tipo_ar?: string,
     dt_ini_valid?: Date,
@@ -100,7 +106,6 @@ export class Request {
     ic_stat?: string,
     dt_incl?: Date,
     dt_atlz?: Date,
-    id_protc_fk?: string,
     id_motiv_isent_tax_fk?: string,
     ic_condm?: string,
     ic_esta_condm?: string,
@@ -126,7 +131,14 @@ export class Request {
     parecer_avcb?: string,
     nr_protc_condm?: string,
   ) {
-    this.id_req_visto = id_req_visto;
+    this.id = id;
+
+    this.cpf = cpf;
+    this.personName = personName;
+    this.cnpj = cnpj;
+    this.corporateName = corporateName;
+    this.protocolId = protocolId;
+
     this.id_projet_fk = id_projet_fk;
     this.id_ativ_econ_fk = id_ativ_econ_fk;
     this.id_sitc_req_fk = id_sitc_req_fk;
@@ -137,10 +149,6 @@ export class Request {
     this.id_tipo_ocup_fk = id_tipo_ocup_fk;
     this.id_usu_fk = id_usu_fk;
     this.ic_pess = ic_pess;
-    this.nr_cpf = nr_cpf;
-    this.nm_pess = nm_pess;
-    this.nr_cnpj = nr_cnpj;
-    this.nm_razao_socl = nm_razao_socl;
     this.ds_titul_estab = ds_titul_estab;
     this.ic_tipo_ar = ic_tipo_ar;
     this.dt_ini_valid = dt_ini_valid;
@@ -163,7 +171,6 @@ export class Request {
     this.ic_stat = ic_stat;
     this.dt_incl = dt_incl;
     this.dt_atlz = dt_atlz;
-    this.id_protc_fk = id_protc_fk;
     this.id_motiv_isent_tax_fk = id_motiv_isent_tax_fk;
     this.ic_condm = ic_condm;
     this.ic_esta_condm = ic_esta_condm;
