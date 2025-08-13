@@ -6,13 +6,16 @@ import {
   Button,
   CardAvcb,
   CardSolicitacao,
-  CustomSelect,
   LineInfo,
   Loading,
+  StatusFilter,
   Tab,
   Tabs,
+  YearFilter,
 } from '@/components';
 import { useSearch } from './hooks/useSearch';
+import { optionsStatus } from '@/utils/optionsStatus';
+import { useState } from 'react';
 
 export default function Search() {
   const {
@@ -28,11 +31,25 @@ export default function Search() {
     loadingScroll,
     dadosMocadosSolicitacoes,
     dadosMocadosAVCB,
+    yearSelected,
+    setYearSelected,
+    statusSelected,
+    setStatusSelected,
   } = useSearch();
+
+  const [searchLoading, setSearchLoading] = useState(false);
 
   if (loadingUser) {
     return <Loading />;
   }
+
+  const handleFakeLoading = () => {
+    setSearchLoading(true);
+    setTimeout(() => {
+      handleSearch();
+      setSearchLoading(false);
+    }, 1400);
+  };
 
   return (
     <>
@@ -55,9 +72,7 @@ export default function Search() {
             variant="secondary"
             className="border-none w-full text-sm h-[50px] translate-y-[25px]"
             disabled={pesquisa === ''}
-            onClick={() => {
-              handleSearch();
-            }}
+            onClick={handleFakeLoading}
           >
             Buscar
           </Button>
@@ -69,26 +84,14 @@ export default function Search() {
           <div className="pt-12 px-6">
             <Tabs activeKey={activeTab} onChange={setActiveTab} justify="justify-start">
               <Tab title="Solicitações">
-                {dadosMocadosSolicitacoes.length > 0 ? (
+                {dadosMocadosSolicitacoes.length > 0 && !searchLoading && (
                   <>
                     <div className="pb-4 flex gap-2">
-                      <CustomSelect
-                        value={''}
-                        onChange={() => {}}
-                        options={[
-                          { value: '', label: 'Ano' },
-                          { value: '2024', label: '2024' },
-                          { value: '2025', label: '2025' },
-                        ]}
-                      />
-                      <CustomSelect
-                        value={''}
-                        onChange={() => {}}
-                        options={[
-                          { value: '', label: 'Status' },
-                          { value: 'Em andamento', label: 'Em andamento' },
-                          { value: 'Em exigência', label: 'Em exigência' },
-                        ]}
+                      <YearFilter yearSelected={yearSelected} onSelect={setYearSelected} />
+                      <StatusFilter
+                        options={optionsStatus}
+                        optionSelected={statusSelected}
+                        onSelect={setStatusSelected}
                       />
                     </div>
                     <div className="display-flex">
@@ -97,7 +100,8 @@ export default function Search() {
                       ))}
                     </div>
                   </>
-                ) : (
+                )}
+                {dadosMocadosSolicitacoes.length === 0 && !searchLoading && (
                   <div className="flex flex-col items-center justify-center  pt-24">
                     <p className="text-[#d6d6d6] font-semibold text-center mb-4">
                       Acesse informações sobre solicitações e AVCB de funcionamento dos locais que
@@ -105,28 +109,21 @@ export default function Search() {
                     </p>
                   </div>
                 )}
+                {searchLoading && (
+                  <div className="flex items-center justify-center flex-col mt-16 ">
+                    <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary"></div>
+                  </div>
+                )}
               </Tab>
               <Tab title="AVCB">
-                {dadosMocadosAVCB.length > 0 ? (
+                {dadosMocadosAVCB.length > 0 && !searchLoading && (
                   <>
                     <div className="pb-4 flex gap-2">
-                      <CustomSelect
-                        value={''}
-                        onChange={() => {}}
-                        options={[
-                          { value: '', label: 'Ano' },
-                          { value: '2024', label: '2024' },
-                          { value: '2025', label: '2025' },
-                        ]}
-                      />
-                      <CustomSelect
-                        value={''}
-                        onChange={() => {}}
-                        options={[
-                          { value: '', label: 'Status' },
-                          { value: 'Em andamento', label: 'Em andamento' },
-                          { value: 'Em exigência', label: 'Em exigência' },
-                        ]}
+                      <YearFilter yearSelected={yearSelected} onSelect={setYearSelected} />
+                      <StatusFilter
+                        options={optionsStatus}
+                        optionSelected={statusSelected}
+                        onSelect={setStatusSelected}
                       />
                     </div>
                     <div className="display-flex">
@@ -135,12 +132,19 @@ export default function Search() {
                       ))}
                     </div>
                   </>
-                ) : (
+                )}
+
+                {dadosMocadosAVCB.length === 0 && !searchLoading && (
                   <div className="flex flex-col items-center justify-center pt-24">
                     <p className="text-[#d6d6d6] font-semibold text-center mb-4">
                       Acesse informações sobre solicitações e AVCB de funcionamento dos locais que
                       você visita.
                     </p>
+                  </div>
+                )}
+                {searchLoading && (
+                  <div className="flex items-center justify-center flex-col mt-16 ">
+                    <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary"></div>
                   </div>
                 )}
               </Tab>

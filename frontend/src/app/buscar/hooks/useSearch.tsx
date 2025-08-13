@@ -36,6 +36,11 @@ export const useSearch = () => {
   const [offsetAvcb, setOffsetAvcb] = useState(0);
   const [loadingScroll, setLoadingScroll] = useState(false);
 
+  const [statusSelected, setStatusSelected] = useState<string | null>(null);
+  const [yearSelected, setYearSelected] = useState<number | null>(null);
+
+  const [temMascara, setTemMascara] = useState(false);
+
   const ITEMS_PER_LOAD = 3;
 
   const carregarMaisSolicitacoes = useCallback(() => {
@@ -148,5 +153,9 @@ export const useSearch = () => {
     loadingScroll,
     dadosMocadosSolicitacoes,
     dadosMocadosAVCB,
+    statusSelected,
+    setStatusSelected,
+    yearSelected,
+    setYearSelected,
   };
 };

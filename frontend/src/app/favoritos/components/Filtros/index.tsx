@@ -1,30 +1,21 @@
 'use client';
 
-import { CustomSelect } from '@/components';
-import React from 'react';
+import { StatusFilter, YearFilter } from '@/components';
+import { optionsStatus } from '@/utils/optionsStatus';
+import React, { useState } from 'react';
 
 type Props = {};
 
 export default function Filtros({}: Props) {
+  const [statusSelected, setStatusSelected] = useState<string | null>(null);
+  const [yearSelected, setYearSelected] = useState<number | null>(null);
   return (
     <>
-      <CustomSelect
-        value={''}
-        onChange={() => {}}
-        options={[
-          { value: '', label: 'Ano' },
-          { value: '2024', label: '2024' },
-          { value: '2025', label: '2025' },
-        ]}
-      />
-      <CustomSelect
-        value={''}
-        onChange={() => {}}
-        options={[
-          { value: '', label: 'Status' },
-          { value: 'Em andamento', label: 'Em andamento' },
-          { value: 'Em exigência', label: 'Em exigência' },
-        ]}
+      <YearFilter yearSelected={yearSelected} onSelect={setYearSelected} />
+      <StatusFilter
+        options={optionsStatus}
+        optionSelected={statusSelected}
+        onSelect={setStatusSelected}
       />
     </>
   );

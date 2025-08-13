@@ -28,7 +28,7 @@ export default function Favorites() {
       </div>
 
       <div className="px-6">
-        <div className="pt-12 flex gap-4 mb-6">
+        <div className="pt-12 flex gap-2 mb-6">
           <Filtros />
         </div>
         {isSolicitacao &&
