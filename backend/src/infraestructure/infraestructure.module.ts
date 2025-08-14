@@ -8,7 +8,7 @@ import { TypeormEnterpriseRepository } from './database/typeorm/repositories/typ
 import { TypeormRequestEntity } from './database/typeorm/entities/typeorm-request.entity';
 import { TypeormRequestRepository } from './database/typeorm/repositories/typeorm-request.repository';
 import { REQUESTS_REPOSITORY } from 'src/domain/repositories/tokens';
-import { TypeormavcbDocumentRepository } from './database/typeorm/repositories/typeorm-avcbDocument.repository';
+import { TypeormavcbDocumentRepository } from './database/typeorm/repositories/typeorm-avcb-document.repository';
 import { TypeormAvcbDocumentView } from './database/typeorm/entities/typeorm-avcbDocument.entity';
 
 const REPOSITORIES = [

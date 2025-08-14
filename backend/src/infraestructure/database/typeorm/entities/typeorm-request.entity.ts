@@ -21,170 +21,170 @@ export class TypeormRequestEntity {
   protocolId?: number;
 
   @Column({ name: 'id_projet_fk' })
-  id_projet_fk?: string;
+  idProjetFk?: string;
 
   @Column({ name: 'id_ativ_econ_fk' })
-  id_ativ_econ_fk?: string;
+  idAtivEconFk?: string;
 
   @Column({ name: 'id_sitc_req_fk' })
-  id_sitc_req_fk?: string;
+  idSitcReqFk?: string;
 
   @Column({ name: 'id_tipo_edifi_fk' })
-  id_tipo_edifi_fk?: string;
+  idTipoEdifiFk?: string;
 
   @Column({ name: 'id_tipo_patrm_fk' })
-  id_tipo_patrm_fk?: string;
+  idTipoPatrmFk?: string;
 
   @Column({ name: 'id_risc_ocup_fk' })
-  id_risc_ocup_fk?: string;
+  idRiscOcupFk?: string;
 
   @Column({ name: 'id_sub_tipo_ocup_fk' })
-  id_sub_tipo_ocup_fk?: string;
+  idSubTipoOcupFk?: string;
 
   @Column({ name: 'id_tipo_ocup_fk' })
-  id_tipo_ocup_fk?: string;
+  idTipoOcupFk?: string;
 
   @Column({ name: 'id_usu_fk' })
-  id_usu_fk?: string;
+  idUsuFk?: string;
 
   @Column({ name: 'ic_pess' })
-  ic_pess?: string;
+  icPess?: string;
 
   @Column({ name: 'ds_titul_estab' })
-  ds_titul_estab?: string;
+  dsTitulEstab?: string;
 
   @Column({ name: 'ic_tipo_ar' })
-  ic_tipo_ar?: string;
+  icTipoAr?: string;
 
   @Column({ name: 'dt_ini_valid' })
-  dt_ini_valid?: Date;
+  dtIniValid?: Date;
 
   @Column({ name: 'dt_fim_valid' })
-  dt_fim_valid?: Date;
+  dtFimValid?: Date;
 
   @Column({ name: 'nr_telef' })
-  nr_telef?: string;
+  nrTelef?: string;
 
   @Column({ name: 'nr_celr' })
-  nr_celr?: string;
+  nrCelr?: string;
 
   @Column({ name: 'ds_email' })
-  ds_email?: string;
+  dsEmail?: string;
 
   @Column({ name: 'nr_area_patrm' })
-  nr_area_patrm?: string;
+  nrAreaPatrm?: string;
 
   @Column({ name: 'nr_area_decld' })
-  nr_area_decld?: string;
+  nrAreaDecld?: string;
 
   @Column({ name: 'nr_cap_max_pess' })
-  nr_cap_max_pess?: string;
+  nrCapMaxPess?: string;
 
   @Column({ name: 'vl_taxa_pgto' })
-  vl_taxa_pgto?: string;
+  vlTaxaPgto?: string;
 
   @Column({ name: 'nr_pavm' })
-  nr_pavm?: string;
+  nrPavm?: string;
 
   @Column({ name: 'nr_alt_edf' })
-  nr_alt_edf?: string;
+  nrAltEdf?: string;
 
   @Column({ name: 'ic_gnv' })
-  ic_gnv?: string;
+  icGnv?: string;
 
   @Column({ name: 'ic_sist_fixo' })
-  ic_sist_fixo?: string;
+  icSistFixo?: string;
 
   @Column({ name: 'ic_mat_expl' })
-  ic_mat_expl?: string;
+  icMatExpl?: string;
 
   @Column({ name: 'id_motiv_isent_tpei_fk' })
-  id_motiv_isent_tpei_fk?: string;
+  idMotivIsentTpeiFk?: string;
 
   @Column({ name: 'ds_obs_ar' })
-  ds_obs_ar?: string;
+  dsObsAr?: string;
 
   @Column({ name: 'ds_obs' })
-  ds_obs?: string;
+  dsObs?: string;
 
   @Column({ name: 'ic_stat' })
-  ic_stat?: string;
+  icStat?: string;
 
   @Column({ name: 'dt_incl' })
-  dt_incl?: Date;
+  dtIncl?: Date;
 
   @Column({ name: 'dt_atlz' })
-  dt_atlz?: Date;
+  dtAtlz?: Date;
 
   @Column({ name: 'id_motiv_isent_tax_fk' })
-  id_motiv_isent_tax_fk?: string;
+  idMotivIsentTaxFk?: string;
 
   @Column({ name: 'ic_condm' })
-  ic_condm?: string;
+  icCondm?: string;
 
   @Column({ name: 'ic_esta_condm' })
-  ic_esta_condm?: string;
+  icEstaCondm?: string;
 
   @Column({ name: 'ds_obs_endr' })
-  ds_obs_endr?: string;
+  dsObsEndr?: string;
 
   @Column({ name: 'id_cidd_x_ome_fk' })
-  id_cidd_x_ome_fk?: string;
+  idCiddXOmeFk?: string;
 
   @Column({ name: 'ds_refer_endr' })
-  ds_refer_endr?: string;
+  dsReferEndr?: string;
 
   @Column({ name: 'ic_reven_gas' })
-  ic_reven_gas?: string;
+  icRevenGas?: string;
 
   @Column({ name: 'ic_posto_combs' })
-  ic_posto_combs?: string;
+  icPostoCombs?: string;
 
   @Column({ name: 'id_tp_event_temp_fk' })
-  id_tp_event_temp_fk?: string;
+  idTpEventTempFk?: string;
 
   @Column({ name: 'ds_tp_event_temp_outro' })
-  ds_tp_event_temp_outro?: string;
+  dsTpEventTempOutro?: string;
 
   @Column({ name: 'id_ocupc_fk' })
-  id_ocupc_fk?: string;
+  idOcupcFk?: string;
 
   @Column({ name: 'dt_emiss_avbc' })
-  dt_emiss_avbc?: Date;
+  dtEmissAvbc?: Date;
 
   @Column({ name: 'ic_sitc_avcb' })
-  ic_sitc_avcb?: string;
+  icSitcAvcb?: string;
 
   @Column({ name: 'nr_protc_projt' })
-  nr_protc_projt?: string;
+  nrProtcProjt?: string;
 
   @Column({ name: 'nr_qtd_botij' })
-  nr_qtd_botij?: string;
+  nrQtdBotij?: string;
 
   @Column({ name: 'ic_event_abert' })
-  ic_event_abert?: string;
+  icEventAbert?: string;
 
   @Column({ name: 'nr_latd' })
-  nr_latd?: string;
+  nrLatd?: string;
 
   @Column({ name: 'nr_long' })
-  nr_long?: string;
+  nrLong?: string;
 
   @Column({ name: 'ic_forma' })
-  ic_forma?: string;
+  icForma?: string;
 
   @Column({ name: 'ic_termo_compr' })
-  ic_termo_compr?: string;
+  icTermoCompr?: string;
 
   @Column({ name: 'ds_obs_termo' })
-  ds_obs_termo?: string;
+  dsObsTermo?: string;
 
   @Column({ name: 'dt_valid_termo' })
-  dt_valid_termo?: Date;
+  dtValidTermo?: Date;
 
   @Column({ name: 'parecer_avcb' })
-  parecer_avcb?: string;
+  parecerAvcb?: string;
 
   @Column({ name: 'nr_protc_condm' })
-  nr_protc_condm?: string;
+  nrProtcCondm?: string;
 }
