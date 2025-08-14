@@ -1,0 +1,142 @@
+version: "3.8"
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: cbmpe_postgres
+    restart: unless-stopped
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:-cbmpe}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-cbmpe123}
+      POSTGRES_DB: ${DB_NAME:-cbmpe_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${DB_USERNAME:-cbmpe} -d ${DB_NAME:-cbmpe_db}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - cbmpe_network
+
+  # Backend NestJS API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cbmpe_backend
+    restart: unless-stopped
+    ports:
+      - "${BACKEND_PORT:-3001}:3000"
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      # Backend Database
+      # DB_HOST: ${DB_HOST:-cbmpe}
+      # DB_PORT: ${DB_PORT:-5432}
+      # DB_USERNAME: ${DB_USERNAME:-cbmpe}
+      # DB_PASSWORD: ${DB_PASSWORD:-cbmpe123}
+      # DB_NAME: ${DB_NAME:-cbmpe_db}
+
+      # CBMPE Database
+      CBMPE_DB_HOST: ${CBMPE_DB_HOST}
+      CBMPE_DB_PORT: ${CBMPE_DB_PORT}
+      CBMPE_DB_USERNAME: ${CBMPE_DB_USERNAME}
+      CBMPE_DB_PASSWORD: ${CBMPE_DB_PASSWORD}
+      CBMPE_DB_NAME: ${CBMPE_DB_NAME}
+
+      # JWT Config
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+      # API Config
+      API_KEY: ${API_KEY:-secret}
+      SWAGGER_BASIC_AUTH_USER: ${SWAGGER_BASIC_AUTH_USER:-cbmpe}
+      SWAGGER_BASIC_AUTH_PASSWORD: ${SWAGGER_BASIC_AUTH_PASSWORD:-1234}
+      # AWS S3 (if needed)
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_REGION: ${AWS_REGION:-us-east-1}
+      S3_BUCKET_NAME: ${S3_BUCKET_NAME}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend/uploads:/app/uploads
+    networks:
+      - cbmpe_network
+
+  # Frontend Next.js
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL}
+        NEXT_PUBLIC_API_KEY: ${NEXT_PUBLIC_API_KEY:-secret}
+        NEXT_PUBLIC_AWS_REGION: ${AWS_REGION:-us-east-1}
+        NEXT_PUBLIC_S3_BUCKET_NAME: ${S3_BUCKET_NAME}
+        NEXT_PUBLIC_S3_ENDPOINT: ${S3_ENDPOINT}
+    container_name: cbmpe_frontend
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      # AWS S3 (if needed)
+      NEXT_PUBLIC_AWS_REGION: ${AWS_REGION:-us-east-1}
+      NEXT_PUBLIC_S3_BUCKET_NAME: ${S3_BUCKET_NAME}
+    depends_on:
+      - backend
+      - localstack
+    networks:
+      - cbmpe_network
+
+  # Nginx Reverse Proxy (optional but recommended for production)
+  nginx:
+    image: nginx:alpine
+    container_name: cbmpe_nginx
+    restart: unless-stopped
+    ports:
+      - "${NGINX_PORT:-80}:80"
+      - "${NGINX_SSL_PORT:-443}:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - cbmpe_network
+
+  localstack:
+    container_name: cbmpe_localstack_s3
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"
+      - "4571:4571"
+    environment:
+      - SERVICES=s3
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - LOCALSTACK_HOST=localstack
+      - AWS_DEFAULT_REGION=us-east-1
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - cbmpe_network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  cbmpe_network:
+    driver: bridge
