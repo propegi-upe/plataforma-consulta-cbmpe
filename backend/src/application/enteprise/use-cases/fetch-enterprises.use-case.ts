@@ -28,7 +28,7 @@ export class FetchEnterprisesUseCase {
   async execute({
     query,
   }: FetchEnterprisesUseCaseRequest): Promise<FetchEnterprisesUseCaseResponse> {
-    const { filter } = query;
+    const { filter, limit, offset } = query;
 
     let enterprises: Enterprise[] = [];
 
@@ -37,28 +37,39 @@ export class FetchEnterprisesUseCase {
 
       switch (field) {
         case 'cnpj':
-          enterprises = await this.enterprisesRepository.findManyByCnpj(filter);
+          enterprises = await this.enterprisesRepository.findManyByCnpj(
+            filter,
+            { limit, offset },
+          );
           break;
 
         case 'cpf':
-          enterprises = await this.enterprisesRepository.findManyByCpf(filter);
+          enterprises = await this.enterprisesRepository.findManyByCpf(filter, {
+            limit,
+            offset,
+          });
           break;
 
         case 'text':
           enterprises =
             await this.enterprisesRepository.findManyByPersonNameOrCorporateName(
               filter,
+              { limit, offset },
             );
           break;
 
         case 'protocol':
           enterprises = await this.enterprisesRepository.findManyByProtocolId(
             Number(filter),
+            { limit, offset },
           );
           break;
       }
     } else {
-      enterprises = await this.enterprisesRepository.findMany(query);
+      enterprises = await this.enterprisesRepository.findMany({
+        limit,
+        offset,
+      });
     }
 
     return {

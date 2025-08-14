@@ -28,7 +28,7 @@ export class FetchRequestsUseCase {
   async execute({
     query,
   }: FetchRequestsUseCaseRequest): Promise<FetchRequestsUseCaseResponse> {
-    const { filter } = query;
+    const { filter, limit, offset } = query;
 
     let requests: Request[] = [];
 
@@ -37,28 +37,39 @@ export class FetchRequestsUseCase {
 
       switch (field) {
         case 'cnpj':
-          requests = await this.requestsRepository.findManyByCnpj(filter);
+          requests = await this.requestsRepository.findManyByCnpj(filter, {
+            limit,
+            offset,
+          });
           break;
 
         case 'cpf':
-          requests = await this.requestsRepository.findManyByCpf(filter);
+          requests = await this.requestsRepository.findManyByCpf(filter, {
+            limit,
+            offset,
+          });
           break;
 
         case 'text':
           requests =
             await this.requestsRepository.findManyByPersonNameOrCorporateName(
               filter,
+              { limit, offset },
             );
           break;
 
         case 'protocol':
           requests = await this.requestsRepository.findManyByProtocolId(
             Number(filter),
+            { limit, offset },
           );
           break;
       }
     } else {
-      requests = await this.requestsRepository.findMany(query);
+      requests = await this.requestsRepository.findMany({
+        limit,
+        offset,
+      });
     }
 
     return {

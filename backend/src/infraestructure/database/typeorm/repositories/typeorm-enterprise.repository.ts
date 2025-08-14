@@ -46,33 +46,81 @@ export class TypeormEnterpriseRepository implements EnterprisesRepository {
     return enterprises.map(EnterpriseMapper.toDomain);
   }
 
-  async findManyByCpf(cpf: string): Promise<Enterprise[]> {
-    const enterprises = await this.repository.find({ where: { cpf } });
+  async findManyByCpf(
+    cpf: string,
+    query?: { limit?: number; offset?: number },
+  ): Promise<Enterprise[]> {
+    const limit = Math.min(
+      query?.limit ?? this.paginationLimit,
+      this.paginationLimit,
+    );
+    const offset = query?.offset ?? 0;
+
+    const enterprises = await this.repository.find({
+      where: { cpf },
+      take: limit,
+      skip: offset,
+    });
 
     return enterprises.map(EnterpriseMapper.toDomain);
   }
 
-  async findManyByCnpj(cnpj: string): Promise<Enterprise[]> {
-    const enterprises = await this.repository.find({ where: { cnpj } });
+  async findManyByCnpj(
+    cnpj: string,
+    query?: { limit?: number; offset?: number },
+  ): Promise<Enterprise[]> {
+    const limit = Math.min(
+      query?.limit ?? this.paginationLimit,
+      this.paginationLimit,
+    );
+    const offset = query?.offset ?? 0;
+
+    const enterprises = await this.repository.find({
+      where: { cnpj },
+      take: limit,
+      skip: offset,
+    });
 
     return enterprises.map(EnterpriseMapper.toDomain);
   }
 
   async findManyByPersonNameOrCorporateName(
     searchText: string,
+    query?: { limit?: number; offset?: number },
   ): Promise<Enterprise[]> {
+    const limit = Math.min(
+      query?.limit ?? this.paginationLimit,
+      this.paginationLimit,
+    );
+    const offset = query?.offset ?? 0;
+
     const enterprises = await this.repository.find({
       where: [
         { personName: ILike(`%${searchText}%`) },
         { corporateName: ILike(`%${searchText}%`) },
       ],
+      take: limit,
+      skip: offset,
     });
 
     return enterprises.map(EnterpriseMapper.toDomain);
   }
 
-  async findManyByProtocolId(protocolId: number): Promise<Enterprise[]> {
-    const enterprises = await this.repository.find({ where: { protocolId } });
+  async findManyByProtocolId(
+    protocolId: number,
+    query?: { limit?: number; offset?: number },
+  ): Promise<Enterprise[]> {
+    const limit = Math.min(
+      query?.limit ?? this.paginationLimit,
+      this.paginationLimit,
+    );
+    const offset = query?.offset ?? 0;
+
+    const enterprises = await this.repository.find({
+      where: { protocolId },
+      take: limit,
+      skip: offset,
+    });
 
     return enterprises.map(EnterpriseMapper.toDomain);
   }
