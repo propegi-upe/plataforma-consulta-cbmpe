@@ -33,7 +33,11 @@ export default function HomePage() {
   };
 
   if (loadingUser) {
-    return <Loading />;
+    return (
+      <div className="flex items-center justify-center h-screen flex-col">
+        <Loading />
+      </div>
+    );
   }
 
   return (

@@ -244,3 +244,13 @@ input:focus {
 .react-multi-carousel-list {
   padding: 0rem 0 1rem 0;
 }
+
+@keyframes spin-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 1s linear infinite;
+}

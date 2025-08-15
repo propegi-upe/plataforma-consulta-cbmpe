@@ -41,7 +41,11 @@ export default function Search() {
   const [searchLoading, setSearchLoading] = useState(false);
 
   if (loadingUser) {
-    return <Loading />;
+    return (
+      <div className="flex items-center justify-center h-screen flex-col">
+        <Loading />
+      </div>
+    );
   }
 
   const handleFakeLoading = () => {
@@ -113,8 +117,8 @@ export default function Search() {
                   </div>
                 )}
                 {searchLoading && (
-                  <div className="flex items-center justify-center flex-col mt-16 ">
-                    <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary"></div>
+                  <div className="flex items-center justify-center flex-col">
+                    <Loading />
                   </div>
                 )}
               </Tab>
@@ -148,8 +152,8 @@ export default function Search() {
                   </div>
                 )}
                 {searchLoading && (
-                  <div className="flex items-center justify-center flex-col mt-16 ">
-                    <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary"></div>
+                  <div className="flex items-center justify-center flex-col">
+                    <Loading />
                   </div>
                 )}
               </Tab>
@@ -158,8 +162,8 @@ export default function Search() {
               ((activeTab === 'Solicitações' &&
                 solicitacoesVisiveis.length < dadosMocadosSolicitacoes.length) ||
                 (activeTab === 'AVCB' && avcbVisiveis.length < dadosMocadosAVCB.length)) && (
-                <div className="flex items-center justify-center flex-col ">
-                  <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-primary"></div>
+                <div className="flex items-center justify-center flex-col">
+                  <Loading />
                 </div>
               )}
           </div>
