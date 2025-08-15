@@ -1,4 +1,5 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { TypeormRequestSituationEntity } from './typeorm-situation-request.entity';
 
 @Entity({ name: 'tb_req_visto', schema: 'ovrsgat' })
 export class TypeormRequestEntity {
@@ -20,14 +21,18 @@ export class TypeormRequestEntity {
   @Column({ name: 'id_protc_fk' })
   protocolId?: number;
 
+  @Column({ name: 'id_sitc_req_fk' })
+  idSitcReqFk?: number;
+
+  @ManyToOne(() => TypeormRequestSituationEntity)
+  @JoinColumn({ name: 'id_sitc_req_fk' })
+  situation: TypeormRequestSituationEntity;
+
   @Column({ name: 'id_projet_fk' })
   idProjetFk?: string;
 
   @Column({ name: 'id_ativ_econ_fk' })
   idAtivEconFk?: string;
-
-  @Column({ name: 'id_sitc_req_fk' })
-  idSitcReqFk?: string;
 
   @Column({ name: 'id_tipo_edifi_fk' })
   idTipoEdifiFk?: string;

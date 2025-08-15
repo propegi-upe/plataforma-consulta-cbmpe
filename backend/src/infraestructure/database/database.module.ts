@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeormEnterpriseEntity } from './typeorm/entities/typeorm-enterprise.entity';
 import { TypeormRequestEntity } from './typeorm/entities/typeorm-request.entity';
 import { TypeormAvcbDocumentView } from './typeorm/entities/typeorm-avcbDocument.entity';
+import { TypeormRequestSituationEntity } from './typeorm/entities/typeorm-situation-request.entity';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -21,6 +22,7 @@ import { TypeormAvcbDocumentView } from './typeorm/entities/typeorm-avcbDocument
             TypeormEnterpriseEntity,
             TypeormRequestEntity,
             TypeormAvcbDocumentView,
+            TypeormRequestSituationEntity,
           ],
           synchronize: configService.get('TYPEORM_SYNCHRONIZE') === 'true',
           logging: configService.get('TYPEORM_LOGGING') === 'true',

@@ -17,7 +17,7 @@ describe('GetEnterpriseUseCase', () => {
     const createdEnterprise = makeEnterpriseData();
     await repo.create(createdEnterprise);
 
-    const result = await useCase.execute({ id: createdEnterprise.id! });
+    const result = await useCase.execute({ id: createdEnterprise.id });
 
     expect(result.enterprise).toBeInstanceOf(Enterprise);
     expect(result.enterprise.id).toBe(createdEnterprise.id);

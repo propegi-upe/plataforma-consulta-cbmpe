@@ -11,7 +11,7 @@ export function makeRequestData(data: Partial<Request> = {}): Request {
 
     idProjetFk: data.idProjetFk ?? '1',
     idAtivEconFk: data.idAtivEconFk ?? '1',
-    idSitcReqFk: data.idSitcReqFk ?? '1',
+    idSitcReqFk: data.idSitcReqFk ?? 1,
     idTipoEdifiFk: data.idTipoEdifiFk ?? '1',
     idTipoPatrmFk: data.idTipoPatrmFk ?? '1',
     idRiscOcupFk: data.idRiscOcupFk ?? '1',

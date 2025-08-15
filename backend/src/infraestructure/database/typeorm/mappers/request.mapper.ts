@@ -1,6 +1,7 @@
 import { Request } from 'src/domain/entities/request.entity';
 import * as dayjs from 'dayjs';
 import { TypeormRequestEntity } from '../entities/typeorm-request.entity';
+import { SituationMapper } from './situation.mapper';
 export class RequestMapper {
   static toDomain(entity: TypeormRequestEntity): Request {
     return new Request(
@@ -11,10 +12,11 @@ export class RequestMapper {
       entity.cnpj,
       entity.corporateName,
       entity.protocolId,
+      entity.idSitcReqFk,
+      SituationMapper.toDomain(entity.situation),
       entity.idProjetFk,
 
       entity.idAtivEconFk,
-      entity.idSitcReqFk,
       entity.idTipoEdifiFk,
       entity.idTipoPatrmFk,
       entity.idRiscOcupFk,

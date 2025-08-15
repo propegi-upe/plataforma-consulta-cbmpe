@@ -21,7 +21,11 @@ export class TypeormRequestRepository implements RequestsRepository {
   }
 
   async findById(id: number): Promise<Request | null> {
-    const request = await this.repository.findOne({ where: { id } });
+    const request = await this.repository.findOne({
+      where: { id },
+
+      relations: ['situation'],
+    });
 
     return request ? RequestMapper.toDomain(request) : null;
   }
@@ -39,6 +43,8 @@ export class TypeormRequestRepository implements RequestsRepository {
     const requests = await this.repository.find({
       take: limit,
       skip: offset,
+
+      relations: ['situation'],
     });
 
     return requests.map(RequestMapper.toDomain);
@@ -58,6 +64,7 @@ export class TypeormRequestRepository implements RequestsRepository {
       where: { cpf },
       take: limit,
       skip: offset,
+      relations: ['situation'],
     });
 
     return requests.map(RequestMapper.toDomain);
@@ -77,6 +84,7 @@ export class TypeormRequestRepository implements RequestsRepository {
       where: { cnpj },
       take: limit,
       skip: offset,
+      relations: ['situation'],
     });
 
     return requests.map(RequestMapper.toDomain);
@@ -99,6 +107,7 @@ export class TypeormRequestRepository implements RequestsRepository {
       ],
       take: limit,
       skip: offset,
+      relations: ['situation'],
     });
 
     return requests.map(RequestMapper.toDomain);
@@ -118,6 +127,7 @@ export class TypeormRequestRepository implements RequestsRepository {
       where: { protocolId },
       take: limit,
       skip: offset,
+      relations: ['situation'],
     });
 
     return requests.map(RequestMapper.toDomain);

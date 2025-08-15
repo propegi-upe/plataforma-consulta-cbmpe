@@ -8,10 +8,11 @@ export class RequestPresenter {
       cnpj: request.cnpj,
       corporateName: request.corporateName,
       protocolId: request.protocolId,
+      idSitcReqFk: request.idSitcReqFk,
+      situation: request.situation,
 
       idProjetFk: request.idProjetFk,
       idAtivEconFk: request.idAtivEconFk,
-      idSitcReqFk: request.idSitcReqFk,
       idTipoEdifiFk: request.idTipoEdifiFk,
       idTipoPatrmFk: request.idTipoPatrmFk,
       idRiscOcupFk: request.idRiscOcupFk,

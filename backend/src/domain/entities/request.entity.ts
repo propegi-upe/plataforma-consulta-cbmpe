@@ -1,3 +1,5 @@
+import { Situation } from './situation.entity';
+
 export class Request {
   public id: number;
 
@@ -6,10 +8,10 @@ export class Request {
   public cnpj?: string;
   public corporateName?: string;
   public protocolId?: number;
-
+  public idSitcReqFk?: number;
+  public situation?: Situation;
   public idProjetFk?: string;
   public idAtivEconFk?: string;
-  public idSitcReqFk?: string;
   public idTipoEdifiFk?: string;
   public idTipoPatrmFk?: string;
   public idRiscOcupFk?: string;
@@ -73,10 +75,11 @@ export class Request {
     cnpj?: string,
     corporateName?: string,
     protocolId?: number,
+    idSitcReqFk?: number,
+    situation?: Situation,
 
     idProjetFk?: string,
     idAtivEconFk?: string,
-    idSitcReqFk?: string,
     idTipoEdifiFk?: string,
     idTipoPatrmFk?: string,
     idRiscOcupFk?: string,
@@ -138,6 +141,7 @@ export class Request {
     this.cnpj = cnpj;
     this.corporateName = corporateName;
     this.protocolId = protocolId;
+    this.situation = situation;
 
     this.idProjetFk = idProjetFk;
     this.idAtivEconFk = idAtivEconFk;

@@ -10,6 +10,7 @@ import { TypeormRequestRepository } from './database/typeorm/repositories/typeor
 import { REQUESTS_REPOSITORY } from 'src/domain/repositories/tokens';
 import { TypeormavcbDocumentRepository } from './database/typeorm/repositories/typeorm-avcb-document.repository';
 import { TypeormAvcbDocumentView } from './database/typeorm/entities/typeorm-avcbDocument.entity';
+import { TypeormRequestSituationEntity } from './database/typeorm/entities/typeorm-situation-request.entity';
 
 const REPOSITORIES = [
   {
@@ -33,6 +34,7 @@ const REPOSITORIES = [
       TypeormEnterpriseEntity,
       TypeormRequestEntity,
       TypeormAvcbDocumentView,
+      TypeormRequestSituationEntity,
     ]),
   ],
   providers: [...REPOSITORIES],
