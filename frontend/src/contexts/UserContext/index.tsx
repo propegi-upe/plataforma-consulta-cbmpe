@@ -2,6 +2,7 @@
 
 import { userData } from '@/types/user';
 import { localData } from '@/utils/localStorage';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 type UserContextType = {
@@ -19,6 +20,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
   const [user, setUser] = useState<userData | null>(null);
   const [loadingUser, setLoadingUser] = useState(true);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const setUserHandler = (value: userData) => {
     setUser(value);
@@ -53,6 +56,12 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setIsUserAuthenticated(false);
     }
   }, [user]);
+
+  useEffect(() => {
+    if (isUserAuthenticated && (pathname === '/entrar' || pathname === '/meutoken')) {
+      router.push('/');
+    }
+  }, [pathname, isUserAuthenticated]);
 
   const value = useMemo(
     () => ({

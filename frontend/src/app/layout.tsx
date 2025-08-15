@@ -15,8 +15,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'LIGALABS TEMPLATE',
-  description: 'FRONTEND TEMPLATE',
+  title: 'SIAP CBMPE',
+  keywords: ['SIAP', 'CBMPE', 'Sistema Integrado de Acompanhamento de Processos'],
+  authors: [{ name: 'LigaLabs', url: 'https://ligalabs.com.br' }],
+  creator: 'LigaLabs',
+  description: 'Sistema Integrado de Acompanhamento de Processos do CBMPE',
 };
 
 export default function RootLayout({

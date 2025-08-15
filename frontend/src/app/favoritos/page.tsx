@@ -7,7 +7,7 @@ import { mockAVCB, mockSolicitacoes } from '@/utils/searchMocks';
 import favorite from '@/assets/return-list-favorite.svg';
 import Image from 'next/image';
 
-export default function Favorites() {
+export default function FavoritesPage() {
   const searchParams = useSearchParams();
   const type = searchParams.get('type');
   const isSolicitacao = type === 'solicitacao';

@@ -44,7 +44,7 @@ const Header: React.FC<Props> = ({}) => {
     );
   }
 
-  if (pathname !== '/') {
+  if (pathname !== '/' && pathname !== '/entrar' && pathname !== '/meutoken') {
     return (
       <div className="flex items-center justify-between bg-primary text-white px-6 h-[50px] pt-2">
         <Image

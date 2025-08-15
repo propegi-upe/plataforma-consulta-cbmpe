@@ -67,7 +67,7 @@ const ModalFavorite: React.FC<ModalFavoritarProps> = ({ open, onClose, children,
             ) : (
               <>
                 <span>
-                  Entre com o gov.br para conseguir{' '}
+                  Entre com seu email para conseguir{' '}
                   <strong>favoritar e ter acesso mais fácil</strong> à solicitações e AVCB dos
                   estabelecimentos de Pernambuco
                 </span>

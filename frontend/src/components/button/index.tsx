@@ -4,6 +4,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?:
     | 'primary'
     | 'secondary'
+    | 'secondaryOutline'
     | 'danger'
     | 'success'
     | 'warning'
@@ -28,12 +29,13 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const baseStyle = 'px-4 py-2 rounded-lg font-medium shadow-md transition-all';
 
-  // Adicione as classes para o estado desabilitado
   const disabledStyle = 'bg-[#C6C7CA] text-white cursor-not-allowed hover:brightness-100';
 
   const variants = {
     primary: 'bg-primary text-white cursor-pointer hover:brightness-90',
     secondary: 'bg-secondary text-white cursor-pointer hover:brightness-95',
+    secondaryOutline:
+      'bg-transparent text-white border-2 border-white cursor-pointer hover:brightness-95 shadow-none font-bold ',
     danger: 'bg-danger text-white cursor-pointer hover:brightness-90',
     success: 'bg-success text-white cursor-pointer hover:brightness-90',
     warning: 'bg-warning text-white cursor-pointer hover:brightness-90',

@@ -19,7 +19,7 @@ import React from 'react';
 import { mockAVCB, mockSolicitacoes } from '@/utils/searchMocks';
 import favorite from '@/assets/return-list-favorite.svg';
 
-export default function Home() {
+export default function HomePage() {
   const router = useRouter();
   const { isUserAuthenticated, user, loadingUser } = useUserContext();
 
