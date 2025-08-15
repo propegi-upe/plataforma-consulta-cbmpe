@@ -13,11 +13,11 @@ import { TypeormRequestSituationEntity } from './typeorm/entities/typeorm-situat
       useFactory: (configService: ConfigService) => {
         return {
           type: 'postgres',
-          host: configService.get('DB_HOST'),
-          port: configService.get('DB_PORT'),
-          username: configService.get('DB_USERNAME'),
-          password: configService.get('DB_PASSWORD'),
-          database: configService.get('DB_NAME'),
+          host: configService.get('CBMPE_DB_HOST'),
+          port: configService.get('CBMPE_DB_PORT'),
+          username: configService.get('CBMPE_DB_USERNAME'),
+          password: configService.get('CBMPE_DB_PASSWORD'),
+          database: configService.get('CBMPE_DB_NAME'),
           entities: [
             TypeormEnterpriseEntity,
             TypeormRequestEntity,
