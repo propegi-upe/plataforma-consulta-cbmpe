@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Deploy script for Perpart Platform
+# Deploy script for CBMPE Platform
 set -e
 
-echo "🚀 Starting Perpart Platform deployment..."
+echo "🚀 Starting CBMPE Platform deployment..."
 
 # Check if .env file exists
 if [ ! -f .env ]; then
