@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  checkpoint-vpn:
+    build: .
+    container_name: checkpoint_vpn
+    cap_add:
+      - NET_ADMIN # Permissão para gerenciar interfaces de rede
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    stdin_open: true
+    tty: true
+    network_mode: "host" # opcional, se precisar que container use rede do host
